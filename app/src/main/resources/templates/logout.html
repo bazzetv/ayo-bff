@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Déconnexion réussie</title>
+  <script>
+    // Détection de l'origine de la requête et redirection
+    const params = new URLSearchParams(window.location.search);
+    const redirectUrl = params.get("redirect") || "/"; // Redirige vers "/" par défaut
+
+    setTimeout(() => {
+      window.location.href = redirectUrl;
+    }, 2000);
+  </script>
+</head>
+<body>
+<h1>Vous avez été déconnecté avec succès.</h1>
+<p>Redirection automatique dans quelques secondes...</p>
+<a href="/">Retourner à l'accueil</a>
+</body>
+</html>

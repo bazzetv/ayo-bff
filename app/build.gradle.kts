@@ -10,6 +10,7 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     alias(libs.plugins.kotlin.jvm)
     id("io.ktor.plugin") version "2.3.0"
+    kotlin("plugin.serialization") version "1.9.21"
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
@@ -26,8 +27,14 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:2.3.6")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
     implementation("io.ktor:ktor-client-core:2.3.6")
+    implementation("io.ktor:ktor-client-apache:2.3.0")
     implementation("io.ktor:ktor-client-cio:2.3.6") // HTTP Client
     implementation("ch.qos.logback:logback-classic:1.4.14") // Logging
+    implementation("io.ktor:ktor-server-auth:2.3.0") // Pour gérer l'authentification
+    implementation("io.ktor:ktor-server-auth-jwt:2.3.0") // Pour gérer JWT (optionnel)
+    implementation("io.ktor:ktor-server-sessions:2.3.0") // Pour gérer les sessions
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("io.ktor:ktor-server-cors:2.3.6")
 }
 
 testing {
@@ -49,5 +56,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "com.bazze.terrai.ai_bff.AppKt"
+    mainClass = "com.terra.bff.application.ApplicationKt"
 }
