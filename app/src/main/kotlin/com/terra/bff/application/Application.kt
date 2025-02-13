@@ -1,14 +1,14 @@
 package com.terra.bff.application
 
 import com.terra.bff.routes.authRoutes
+import com.terra.bff.routes.configureNotificationsRoutes
 import com.terra.bff.routes.routeApi
-import com.terra.bff.websockets.websocketRoutes
 import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
-import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
@@ -25,6 +25,7 @@ fun main() {
 fun Application.module() {
     configureSessions()
     configureSecurity()
+    configureSessionAuth()
     install(CORS) {
         allowHost("localhost:5173", schemes = listOf("http")) // Autorise les requêtes depuis le frontend React
         allowCredentials = true // Permet d'envoyer les cookies avec les requêtes
@@ -41,8 +42,8 @@ fun Application.module() {
     }
 
     routing {
-        authRoutes() // ✅ Utilise les routes d'auth depuis `AuthRoutes.kt`
+        authRoutes()
         routeApi()
-        websocketRoutes()
+        configureNotificationsRoutes()
     }
 }

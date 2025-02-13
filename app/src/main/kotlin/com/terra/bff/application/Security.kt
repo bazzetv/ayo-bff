@@ -5,12 +5,13 @@ import io.ktor.server.auth.*
 import io.ktor.client.*
 import io.ktor.client.engine.apache.*
 import io.ktor.http.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.sessions.*
 
 fun Application.configureSecurity() {
     install(Authentication) {
         oauth("auth-oauth-google") {
-            println("GOOGLE_CLIENT_ID: ${System.getenv("GOOGLE_CLIENT_ID")}")
-            println("GOOGLE_CLIENT_SECRET: ${System.getenv("GOOGLE_CLIENT_SECRET")}")
             urlProvider = { "http://localhost:8080/auth/callback" }
             providerLookup = {
                 OAuthServerSettings.OAuth2ServerSettings(
@@ -24,6 +25,18 @@ fun Application.configureSecurity() {
                 )
             }
             client = HttpClient(Apache)
+        }
+    }
+}
+
+fun Application.configureSessionAuth() {
+    intercept(ApplicationCallPipeline.Plugins) {
+        if (call.request.path().startsWith("/api/generate")) {
+            val session = call.sessions.get<UserSession>()
+            if (session == null) {
+                call.respond(HttpStatusCode.Unauthorized, "Utilisateur non authentifié")
+                finish() // Empêche la requête d'aller plus loin
+            }
         }
     }
 }

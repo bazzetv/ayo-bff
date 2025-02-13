@@ -1,0 +1,21 @@
+### Ouvrir une session WebSocket pour l'utilisateur 1234
+WEBSOCKET ws://localhost:8080/api/notifications/ws?token=root&user_id=1234
+Content-Type: application/text // Used for content highlighting only
+
+test
+
+=== wait-for-server
+
+
+### Tester l'envoi d'une image en binaire via POST /notify
+### Envoyer une image via /notify
+POST http://localhost:8080/api/notifications/notify?user_id=1234
+Authorization: Bearer root
+Content-Type: multipart/form-data; boundary=WebKitFormBoundary123456
+
+--WebKitFormBoundary123456
+Content-Disposition: form-data; name="file"; filename="image.jpg"
+Content-Type: image/jpeg
+
+< ./images/image1.webp
+--WebKitFormBoundary123456--

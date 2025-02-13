@@ -15,6 +15,7 @@ fun Application.configureSessions() {
             cookie.extensions["SameSite"] = "lax"
             cookie.httpOnly = true
             cookie.secure = false
+            cookie.path = "/"
             transform(SessionTransportTransformerMessageAuthentication(hex("4a6f686e446f65313233343536373839")))
         }
     }

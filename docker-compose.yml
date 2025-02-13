@@ -1,0 +1,16 @@
+services:
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"   # Port API S3/GCS
+      - "9001:9001"   # Port Console Web
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin123
+    volumes:
+      - minio_data:/data
+    command: server --console-address ":9001" /data
+
+volumes:
+  minio_data:
