@@ -96,32 +96,6 @@ fun Route.routeApi() {
 
 fun Routing.configureNotificationsRoutes() {
     route("/api/notifications") {
-        // WebSocket pour envoyer des événements au front
-        webSocket("/ws") {
-            val token = call.request.queryParameters["token"]
-            if (token != API_SECRET) {
-                close(CloseReason(CloseReason.Codes.VIOLATED_POLICY, "⛔ Accès refusé"))
-                return@webSocket
-            }
-            println("✅ Connexion WebSocket autorisée")
-            val userId = call.request.queryParameters["user_id"] ?: return@webSocket close(
-                CloseReason(CloseReason.Codes.VIOLATED_POLICY, "No user_id")
-            )
-            userSessions[userId] = this
-            println("✅ WebSocket ouvert pour $userId")
-
-            try {
-                for (frame in incoming) {
-                    if (frame is Frame.Text) {
-                        println("🔹 Message reçu du client : ${frame.readText()}")
-                    }
-                }
-            } finally {
-                println("❌ Fermeture WebSocket pour $userId")
-                userSessions.remove(userId)
-            }
-        }
-
         // Endpoint HTTP appelé par le backend FastAPI
         post("/notify") {
             val authHeader = call.request.headers["Authorization"]
