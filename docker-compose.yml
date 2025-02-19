@@ -1,4 +1,19 @@
 services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: terraai
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - terra_network
+
   minio:
     image: quay.io/minio/minio
     container_name: minio
@@ -11,6 +26,12 @@ services:
     volumes:
       - minio_data:/data
     command: server --console-address ":9001" /data
+    networks:
+      - terra_network
+
+networks:
+  terra_network:
 
 volumes:
   minio_data:
+  postgres_data:

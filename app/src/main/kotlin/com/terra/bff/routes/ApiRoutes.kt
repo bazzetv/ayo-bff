@@ -1,186 +1,173 @@
 package com.terra.bff.routes
 
-import com.terra.bff.application.UserSession
-import com.terra.bff.application.log
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import com.terra.bff.database.AuthGoogleTable
+import com.terra.bff.database.AuthPasswordTable
+import com.terra.bff.database.UsersTable
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.server.sessions.*
-import io.ktor.server.websocket.*
-import io.ktor.websocket.*
-import java.util.concurrent.ConcurrentHashMap
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.mindrot.jbcrypt.BCrypt
+import java.util.*
 
-private val client = HttpClient()
-val userSessions = ConcurrentHashMap<String, WebSocketSession>()
-val API_SECRET = System.getenv("API_SECRET") ?: "default-secret"  // À configurer dans les variables d'env
+val client = HttpClient(CIO)
 
-fun Route.routeApi() {
+// 🔥 Variables d’environnement pour éviter les hardcodages
+val BFF_CALLBACK_URL = System.getenv("BFF_CALLBACK_URL") ?: "http://localhost:8080/auth/callback"
+val JWT_SECRET = System.getenv("JWT_SECRET") ?: "monSuperSecretJWT"
 
-    authenticate("auth-oauth-google", strategy = AuthenticationStrategy.Optional) {
-        route("/api") {
+fun generateJwt(userId: UUID, email: String): String {
+    return JWT.create()
+        .withIssuer("terraai")
+        .withClaim("user_id", userId.toString())
+        .withClaim("email", email)
+        .withExpiresAt(Date(System.currentTimeMillis() + 60 * 60 * 1000)) // Expire en 1h
+        .sign(Algorithm.HMAC256(JWT_SECRET))
+}
 
-            route("/generate") {
-                get {
-                    val session = call.sessions.get<UserSession>()
-                    if (session == null) {
-                        call.respond(HttpStatusCode.Unauthorized, "Utilisateur non authentifié")
-                        return@get
-                    }
+@Serializable
+data class RegisterRequest(val email: String, val password: String)
 
-                    val prompt = call.request.queryParameters["prompt"]
-                        ?: return@get call.respondText("Missing prompt", status = HttpStatusCode.BadRequest)
+@Serializable
+data class RegisterResponse(
+    val message: String,
+    val userId: String,
+    val token: String
+)
 
-                    val response: String = client.get("http://localhost:8000/generate?prompt=$prompt").body()
-                    call.respondText(response)
+fun Route.apiRoutes() {
+
+    route("/auth") {
+
+        // 🔹 1️⃣ Redirection vers Google OAuth
+        get("/login") {
+            val clientId = System.getenv("GOOGLE_CLIENT_ID")
+            val authUrl = "https://accounts.google.com/o/oauth2/auth" +
+                    "?client_id=$clientId" +
+                    "&redirect_uri=$BFF_CALLBACK_URL" +
+                    "&response_type=code" +
+                    "&scope=email profile" +
+                    "&access_type=offline" +
+                    "&prompt=consent"
+
+            call.respondRedirect(authUrl)
+        }
+
+        // 🔹 2️⃣ Enregistrement d'un utilisateur avec email/mot de passe
+        post("/register") {
+            val request = call.receive<RegisterRequest>()
+            val existingUser = transaction {
+                UsersTable.select { UsersTable.email eq request.email }.firstOrNull()
+            }
+
+            if (existingUser != null) {
+                call.respond(HttpStatusCode.Conflict, "Un utilisateur avec cet email existe déjà.")
+                return@post
+            }
+
+            val userId = UUID.randomUUID()
+            val hashedPassword = BCrypt.hashpw(request.password, BCrypt.gensalt())
+
+            transaction {
+                UsersTable.insert {
+                    it[id] = userId
+                    it[email] = request.email
+                }
+                AuthPasswordTable.insert {
+                    it[AuthPasswordTable.userId] = userId
+                    it[passwordHash] = hashedPassword
                 }
             }
 
-            post("/train") {
-                val response: String = client.post("http://localhost:8000/train").body()
-                call.respondText(response)
+            val jwt = generateJwt(userId, request.email)
+            call.respond(HttpStatusCode.Created, RegisterResponse("Utilisateur créé avec succès", userId.toString(), jwt))
+        }
+
+        // 🔹 3️⃣ Callback de Google OAuth
+        get("/callback") {
+            val code = call.request.queryParameters["code"]
+            val frontendRedirectUri = call.request.queryParameters["redirect_uri"] ?: "exp://127.0.0.1:19000/--/"
+
+            if (code == null) {
+                call.respond(HttpStatusCode.BadRequest, "Code OAuth manquant")
+                return@get
             }
 
-            post("/optimize-prompt") {
-                val userPrompt = call.request.queryParameters["prompt"]
-                    ?: return@post call.respondText("Missing prompt", status = HttpStatusCode.BadRequest)
-
-                val response: String = client.post("http://localhost:8000/optimize-prompt") {
-                    parameter("prompt", userPrompt)
+            try {
+                val response: String = client.post("https://oauth2.googleapis.com/token") {
+                    parameter("client_id", System.getenv("GOOGLE_CLIENT_ID"))
+                    parameter("client_secret", System.getenv("GOOGLE_CLIENT_SECRET"))
+                    parameter("code", code)
+                    parameter("grant_type", "authorization_code")
+                    parameter("redirect_uri", BFF_CALLBACK_URL)
                 }.body()
-                call.respondText(response)
-            }
 
-            webSocket("/ws") {
-                val userId = call.request.queryParameters["user_id"] ?: return@webSocket close(CloseReason(CloseReason.Codes.VIOLATED_POLICY, "No user_id"))
+                val json = Json.parseToJsonElement(response).jsonObject
+                val accessToken = json["access_token"]?.jsonPrimitive?.contentOrNull
+                    ?: return@get call.respond(HttpStatusCode.Unauthorized, "Échec de l'échange du token")
 
-                userSessions[userId] = this
-                println("✅ Connexion WebSocket ouverte pour l'utilisateur $userId")
+                val userInfo: String = client.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                    header("Authorization", "Bearer $accessToken")
+                }.body()
 
-                try {
-                    for (frame in incoming) {
-                        if (frame is Frame.Text) {
-                            println("🔹 Message reçu du client : ${frame.readText()}")
+                val userJson = Json.parseToJsonElement(userInfo).jsonObject
+                val googleId = userJson["id"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "ID utilisateur manquant")
+                val email = userJson["email"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "Email utilisateur manquant")
+
+                val userId = transaction {
+                    UsersTable.select { UsersTable.email eq email }.singleOrNull()?.get(UsersTable.id)
+                        ?: run {
+                            val newId = UUID.randomUUID()
+                            UsersTable.insert {
+                                it[id] = newId
+                                it[this.email] = email
+                            }
+                            AuthGoogleTable.insert {
+                                it[AuthGoogleTable.userId] = newId
+                                it[AuthGoogleTable.googleId] = googleId
+                            }
+                            newId
                         }
-                    }
-                } finally {
-                    println("❌ Fermeture de la connexion WebSocket pour $userId")
-                    userSessions.remove(userId)
                 }
-            }
 
-            // Endpoint appelé par le backend Python
-            post("/notify") {
-                val userId = call.request.queryParameters["user_id"]
-                val eventType = call.request.queryParameters["event"]
-                val imageUrl = call.request.queryParameters["image_url"]
-
-                val session = userSessions[userId]
-
-                if (session != null && imageUrl != null) {
-                    session.send(Frame.Text("✅ $eventType terminé pour l'utilisateur $userId. Image : $imageUrl"))
-                    call.respondText("Notification envoyée à $userId avec image.")
-                } else {
-                    call.respondText("Aucune connexion WebSocket pour $userId", status = HttpStatusCode.NotFound)
-                }
-            }
-        }
-    }
-}
-
-fun Routing.configureNotificationsRoutes() {
-    route("/api/notifications") {
-        // Endpoint HTTP appelé par le backend FastAPI
-        post("/notify") {
-            val authHeader = call.request.headers["Authorization"]
-            if (authHeader != "Bearer $API_SECRET") {
-                call.respond(HttpStatusCode.Unauthorized, "⛔ Accès refusé")
-                return@post
-            }
-            val userId = call.request.queryParameters["user_id"]
-            val session = userSessions[userId]
-            if (session == null) {
-                call.respond(HttpStatusCode.NotFound, "❌ Aucun WebSocket connecté pour $userId")
-                return@post
-            }
-
-            val multipart = call.receiveMultipart()
-            val imageBytesList = mutableListOf<ByteArray>()
-            multipart.forEachPart { part ->
-                if (part is PartData.FileItem && imageBytesList.size < 3) {
-                    imageBytesList.add(part.streamProvider().readBytes())
-                }
-                part.dispose()
-            }
-
-            if (imageBytesList.isEmpty()) {
-                call.respond(HttpStatusCode.BadRequest, "❌ Aucune image envoyée")
-                return@post
-            }
-
-            // Envoyer chaque image via WebSocket
-            imageBytesList.forEach { imageBytes ->
-                session.send(Frame.Binary(true, imageBytes))
-            }
-
-            call.respondText("📩 ${imageBytesList.size} image(s) envoyée(s) à $userId via WebSocket")
-        }
-    }
-}
-
-fun Route.authRoutes() {
-    authenticate("auth-oauth-google") {
-        get("/auth/login") {
-            call.respondRedirect("/auth/callback")
-        }
-
-        get("/auth/callback") {
-            val principal: OAuthAccessTokenResponse.OAuth2? = call.authentication.principal()
-            if (principal != null) {
-                val accessToken = principal.accessToken
-                call.sessions.set(UserSession(accessToken))
-
-                // ✅ Chargement du fichier HTML depuis "resources/templates/"
-                val htmlContent = getHtmlTemplate("success.html")
-                call.respondText(htmlContent, contentType = ContentType.Text.Html)
-            } else {
-                call.application.log.error("Échec de l'authentification: Principal est null")
-                call.respond(HttpStatusCode.Unauthorized, "Échec de l'authentification")
+                val jwt = generateJwt(userId, email)
+                call.respondRedirect("$frontendRedirectUri?token=$jwt")
+            } catch (e: Exception) {
+                call.application.log.error("Erreur OAuth: ${e.message}")
+                call.respond(HttpStatusCode.InternalServerError, "Erreur interne")
             }
         }
     }
 
-    get("/auth/session") {
-        val session = call.sessions.get<UserSession>()
-        if (session != null) {
-            log.info("Session active : ${session.token}")
-            call.respondText("Session active pour l'utilisateur: ${session.userId ?: "inconnu"}")
-        } else {
-            log.warn("Aucune session trouvée")
-            call.respond(HttpStatusCode.Unauthorized, "Pas de session active")
+    authenticate("auth-jwt") {
+        get("/protected") {
+            val principal = call.principal<JWTPrincipal>()
+            val userId = principal?.payload?.getClaim("user_id")?.asString()
+            val email = principal?.payload?.getClaim("email")?.asString()
+
+            if (userId == null || email == null) {
+                call.respond(HttpStatusCode.Unauthorized, "Session invalide ou expirée")
+                return@get
+            }
+
+            call.respond(HttpStatusCode.OK, RegisterResponse("Accès autorisé", userId, email))
         }
     }
-
-    get("/auth/logout") {
-        call.sessions.clear<UserSession>()
-
-        // ✅ Chargement du fichier HTML depuis "resources/templates/"
-        val htmlContent = getHtmlTemplate("logout.html")
-        call.respondText(htmlContent, contentType = ContentType.Text.Html)
-    }
-}
-
-/**
- * ✅ Fonction générique pour charger un fichier HTML depuis les templates.
- */
-private fun getHtmlTemplate(fileName: String): String {
-    return Application::class.java.classLoader.getResource("templates/$fileName")
-        ?.readText()
-        ?: "<h1>Erreur 500</h1><p>Fichier HTML introuvable</p>"
 }

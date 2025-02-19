@@ -1,8 +1,7 @@
 package com.terra.bff.application
 
-import com.terra.bff.routes.authRoutes
-import com.terra.bff.routes.configureNotificationsRoutes
-import com.terra.bff.routes.routeApi
+import com.terra.bff.database.DatabaseFactory
+import com.terra.bff.routes.apiRoutes
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -17,13 +16,12 @@ import org.slf4j.LoggerFactory
 val log: Logger = LoggerFactory.getLogger("TerraAI")
 
 fun main() {
+    DatabaseFactory.init()
     embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
 }
 
 fun Application.module() {
-    configureSessions()
     configureSecurity()
-    configureSessionAuth()
     install(CORS) {
         allowHost("localhost:5173", schemes = listOf("http"))
         allowCredentials = true
@@ -36,8 +34,6 @@ fun Application.module() {
     install(ContentNegotiation) { json() }
 
     routing {
-        authRoutes()
-        routeApi()
-        configureNotificationsRoutes()
+        apiRoutes()
     }
 }

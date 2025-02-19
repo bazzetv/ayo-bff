@@ -21,20 +21,37 @@ repositories {
 }
 
 dependencies {
+    // 🚀 Ktor Core
     implementation("io.ktor:ktor-server-core:2.3.6")
     implementation("io.ktor:ktor-server-netty:2.3.6")
-    implementation("io.ktor:ktor-server-websockets:2.3.6")
+
+    // 🚀 Authentification & JWT (Stateless)
+    implementation("io.ktor:ktor-server-auth:2.3.6")
+    implementation("io.ktor:ktor-server-auth-jwt:2.3.6")
+    implementation("org.mindrot:jbcrypt:0.4")
+
+    // 🚀 Gestion des requêtes HTTP (Client & Server)
     implementation("io.ktor:ktor-server-content-negotiation:2.3.6")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
     implementation("io.ktor:ktor-client-core:2.3.6")
-    implementation("io.ktor:ktor-client-apache:2.3.0")
-    implementation("io.ktor:ktor-client-cio:2.3.6") // HTTP Client
-    implementation("ch.qos.logback:logback-classic:1.4.14") // Logging
-    implementation("io.ktor:ktor-server-auth:2.3.0") // Pour gérer l'authentification
-    implementation("io.ktor:ktor-server-auth-jwt:2.3.0") // Pour gérer JWT (optionnel)
-    implementation("io.ktor:ktor-server-sessions:2.3.0") // Pour gérer les sessions
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("io.ktor:ktor-client-cio:2.3.6") // HTTP Client pour appeler des APIs externes
+
+    // 🚀 CORS (Cross-Origin Requests) si tu appelles ton API depuis un frontend
     implementation("io.ktor:ktor-server-cors:2.3.6")
+
+    // 🚀 Logging avec Logback
+    implementation("ch.qos.logback:logback-classic:1.4.14")
+
+    // 🚀 Gestion des Bases de Données (Exposed + PostgreSQL)
+    implementation("org.jetbrains.exposed:exposed-core:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.41.1") // Support des dates
+    implementation("org.postgresql:postgresql:42.5.1") // Driver PostgreSQL
+    implementation("com.zaxxer:HikariCP:5.0.1") // Gestion des connexions DB avec HikariCP
+
+    // 🚀 JSON Parsing
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 }
 
 testing {
