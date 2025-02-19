@@ -1,7 +1,8 @@
 package com.terra.bff.application
 
 import com.terra.bff.database.DatabaseFactory
-import com.terra.bff.routes.apiRoutes
+import com.terra.bff.routes.authRoutes
+import com.terra.bff.routes.generateRoutes
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -34,6 +35,7 @@ fun Application.module() {
     install(ContentNegotiation) { json() }
 
     routing {
-        apiRoutes()
+        authRoutes()
+        generateRoutes()
     }
 }

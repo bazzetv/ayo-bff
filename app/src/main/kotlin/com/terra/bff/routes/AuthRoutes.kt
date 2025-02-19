@@ -1,18 +1,15 @@
 package com.terra.bff.routes
 
-import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
 import com.terra.bff.database.AuthGoogleTable
 import com.terra.bff.database.AuthPasswordTable
 import com.terra.bff.database.UsersTable
+import com.terra.bff.utils.generateJwt
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -29,18 +26,8 @@ import java.util.*
 
 val client = HttpClient(CIO)
 
-// 🔥 Variables d’environnement pour éviter les hardcodages
+// Variables d’environnement
 val BFF_CALLBACK_URL = System.getenv("BFF_CALLBACK_URL") ?: "http://localhost:8080/auth/callback"
-val JWT_SECRET = System.getenv("JWT_SECRET") ?: "monSuperSecretJWT"
-
-fun generateJwt(userId: UUID, email: String): String {
-    return JWT.create()
-        .withIssuer("terraai")
-        .withClaim("user_id", userId.toString())
-        .withClaim("email", email)
-        .withExpiresAt(Date(System.currentTimeMillis() + 60 * 60 * 1000)) // Expire en 1h
-        .sign(Algorithm.HMAC256(JWT_SECRET))
-}
 
 @Serializable
 data class RegisterRequest(val email: String, val password: String)
@@ -52,11 +39,10 @@ data class RegisterResponse(
     val token: String
 )
 
-fun Route.apiRoutes() {
+fun Route.authRoutes() {
 
     route("/auth") {
 
-        // 🔹 1️⃣ Redirection vers Google OAuth
         get("/login") {
             val clientId = System.getenv("GOOGLE_CLIENT_ID")
             val authUrl = "https://accounts.google.com/o/oauth2/auth" +
@@ -70,7 +56,6 @@ fun Route.apiRoutes() {
             call.respondRedirect(authUrl)
         }
 
-        // 🔹 2️⃣ Enregistrement d'un utilisateur avec email/mot de passe
         post("/register") {
             val request = call.receive<RegisterRequest>()
             val existingUser = transaction {
@@ -100,7 +85,6 @@ fun Route.apiRoutes() {
             call.respond(HttpStatusCode.Created, RegisterResponse("Utilisateur créé avec succès", userId.toString(), jwt))
         }
 
-        // 🔹 3️⃣ Callback de Google OAuth
         get("/callback") {
             val code = call.request.queryParameters["code"]
             val frontendRedirectUri = call.request.queryParameters["redirect_uri"] ?: "exp://127.0.0.1:19000/--/"
@@ -131,21 +115,7 @@ fun Route.apiRoutes() {
                 val googleId = userJson["id"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "ID utilisateur manquant")
                 val email = userJson["email"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "Email utilisateur manquant")
 
-                val userId = transaction {
-                    UsersTable.select { UsersTable.email eq email }.singleOrNull()?.get(UsersTable.id)
-                        ?: run {
-                            val newId = UUID.randomUUID()
-                            UsersTable.insert {
-                                it[id] = newId
-                                it[this.email] = email
-                            }
-                            AuthGoogleTable.insert {
-                                it[AuthGoogleTable.userId] = newId
-                                it[AuthGoogleTable.googleId] = googleId
-                            }
-                            newId
-                        }
-                }
+                val userId = UsersTable.findOrCreateUserByGoogleId(email, googleId)
 
                 val jwt = generateJwt(userId, email)
                 call.respondRedirect("$frontendRedirectUri?token=$jwt")
@@ -153,21 +123,6 @@ fun Route.apiRoutes() {
                 call.application.log.error("Erreur OAuth: ${e.message}")
                 call.respond(HttpStatusCode.InternalServerError, "Erreur interne")
             }
-        }
-    }
-
-    authenticate("auth-jwt") {
-        get("/protected") {
-            val principal = call.principal<JWTPrincipal>()
-            val userId = principal?.payload?.getClaim("user_id")?.asString()
-            val email = principal?.payload?.getClaim("email")?.asString()
-
-            if (userId == null || email == null) {
-                call.respond(HttpStatusCode.Unauthorized, "Session invalide ou expirée")
-                return@get
-            }
-
-            call.respond(HttpStatusCode.OK, RegisterResponse("Accès autorisé", userId, email))
         }
     }
 }

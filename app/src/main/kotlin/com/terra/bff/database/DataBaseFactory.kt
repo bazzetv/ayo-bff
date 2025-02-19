@@ -19,7 +19,7 @@ object DatabaseFactory {
     fun init() {
         Database.connect(dataSource)
         transaction {
-            SchemaUtils.create(UsersTable, AuthGoogleTable, AuthPasswordTable)
+            SchemaUtils.create(UsersTable, AuthGoogleTable, AuthPasswordTable, GeneratedImagesTable, GenerationRequestsTable)
         }
     }
 }
