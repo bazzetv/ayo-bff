@@ -34,6 +34,26 @@ object UsersTable : Table("users") {
                 }
         }
     }
+
+    fun findOrCreateUserByAppleId(email: String, appleId: String?): UUID {
+        return transaction {
+            UsersTable.select { UsersTable.email eq email }.singleOrNull()?.get(UsersTable.id)
+                ?: run {
+                    val newId = UUID.randomUUID()
+                    UsersTable.insert {
+                        it[id] = newId
+                        it[UsersTable.email] = email
+                    }
+                    if (appleId != null) {
+                        AuthAppleTable.insert {
+                            it[userId] = newId
+                            it[AuthAppleTable.appleId] = appleId
+                        }
+                    }
+                    newId
+                }
+        }
+    }
 }
 
 // Table pour les utilisateurs Google
@@ -48,6 +68,13 @@ object AuthGoogleTable : Table("auth_google") {
 object AuthPasswordTable : Table("auth_password") {
     val userId = uuid("user_id").references(UsersTable.id)
     val passwordHash = varchar("password_hash", 255)
+
+    override val primaryKey = PrimaryKey(userId)
+}
+
+object AuthAppleTable : Table("auth_apple") {
+    val userId = uuid("user_id").references(UsersTable.id)
+    val appleId = varchar("apple_id", 255).uniqueIndex()
 
     override val primaryKey = PrimaryKey(userId)
 }

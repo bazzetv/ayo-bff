@@ -52,6 +52,10 @@ dependencies {
 
     // 🚀 JSON Parsing
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+    // 🚀 Database
+    implementation("org.flywaydb:flyway-core:9.22.1") // Ajoute la dernière version de Flyway
+    implementation("org.postgresql:postgresql:42.5.4") // Assure-toi d’avoir le driver PostgreSQL
 }
 
 testing {

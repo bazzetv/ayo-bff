@@ -1,9 +1,11 @@
 package com.terra.bff.routes
 
-import com.terra.bff.database.AuthGoogleTable
 import com.terra.bff.database.AuthPasswordTable
 import com.terra.bff.database.UsersTable
-import com.terra.bff.utils.generateJwt
+import com.terra.bff.utils.AppleAuthUtils
+import com.terra.bff.utils.JwtUtils
+import com.terra.bff.utils.JwtUtils.generateJwt
+import com.terra.bff.utils.JwtUtils.generateRefreshToken
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -26,7 +28,6 @@ import java.util.*
 
 val client = HttpClient(CIO)
 
-// Variables d’environnement
 val BFF_CALLBACK_URL = System.getenv("BFF_CALLBACK_URL") ?: "http://localhost:8080/auth/callback"
 
 @Serializable
@@ -36,7 +37,16 @@ data class RegisterRequest(val email: String, val password: String)
 data class RegisterResponse(
     val message: String,
     val userId: String,
-    val token: String
+    val token: String,
+    val refreshToken: String
+)
+
+@Serializable
+data class AppleLoginRequest(
+    val appleId: String,
+    val identityToken: String,
+    val email: String?,
+    val fullName: String?
 )
 
 fun Route.authRoutes() {
@@ -54,6 +64,39 @@ fun Route.authRoutes() {
                     "&prompt=consent"
 
             call.respondRedirect(authUrl)
+        }
+
+        post("/apple-login") {
+            val request = call.receive<AppleLoginRequest>()
+            val requestEmail = request.email?.takeIf { it.isNotBlank() } ?: "issambazze@gmail.com"
+
+            if (request.identityToken.isBlank()) {
+                call.respond(HttpStatusCode.BadRequest, "Token Apple manquant")
+                return@post
+            }
+
+            try {
+                // ✅ Vérification du token Apple
+                val applePublicKeyUrl = "https://appleid.apple.com/auth/keys"
+                val isValid = AppleAuthUtils.verifyIdentityToken(request.identityToken, applePublicKeyUrl)
+
+                if (!isValid) {
+                    call.respond(HttpStatusCode.Unauthorized, "Token Apple invalide")
+                    return@post
+                }
+
+                // ✅ Recherche ou création de l'utilisateur
+                val userId = UsersTable.findOrCreateUserByAppleId(requestEmail, request.appleId)
+
+                // ✅ Génération des tokens
+                val accessToken = generateJwt(userId, requestEmail)
+                val refreshToken = generateRefreshToken(userId, requestEmail)
+
+                call.respond(HttpStatusCode.OK, mapOf("token" to accessToken, "refreshToken" to refreshToken))
+            } catch (e: Exception) {
+                call.application.log.error("Erreur lors de la connexion Apple: ${e.message}")
+                call.respond(HttpStatusCode.InternalServerError, "Erreur interne")
+            }
         }
 
         post("/register") {
@@ -81,8 +124,10 @@ fun Route.authRoutes() {
                 }
             }
 
-            val jwt = generateJwt(userId, request.email)
-            call.respond(HttpStatusCode.Created, RegisterResponse("Utilisateur créé avec succès", userId.toString(), jwt))
+            val accessToken = generateJwt(userId, request.email)
+            val refreshToken = generateRefreshToken(userId, request.email)
+
+            call.respond(HttpStatusCode.Created, RegisterResponse("Utilisateur créé avec succès", userId.toString(), accessToken, refreshToken))
         }
 
         get("/callback") {
@@ -117,11 +162,30 @@ fun Route.authRoutes() {
 
                 val userId = UsersTable.findOrCreateUserByGoogleId(email, googleId)
 
-                val jwt = generateJwt(userId, email)
-                call.respondRedirect("$frontendRedirectUri?token=$jwt")
+                val accessTokenJwt = generateJwt(userId, email)
+                val refreshToken = generateRefreshToken(userId, email)
+
+                call.respondRedirect("$frontendRedirectUri?token=$accessTokenJwt&refreshToken=$refreshToken")
             } catch (e: Exception) {
                 call.application.log.error("Erreur OAuth: ${e.message}")
                 call.respond(HttpStatusCode.InternalServerError, "Erreur interne")
+            }
+        }
+
+        post("/refresh") {
+            val refreshToken = call.request.header("Authorization")?.removePrefix("Bearer ")
+
+            if (refreshToken == null) {
+                call.respond(HttpStatusCode.Unauthorized, "Refresh Token manquant")
+                return@post
+            }
+
+            val newAccessToken = JwtUtils.refreshAccessToken(refreshToken)
+
+            if (newAccessToken != null) {
+                call.respond(HttpStatusCode.OK, mapOf("accessToken" to newAccessToken))
+            } else {
+                call.respond(HttpStatusCode.Unauthorized, "Refresh Token invalide ou expiré")
             }
         }
     }
