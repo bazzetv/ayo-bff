@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     id("io.ktor.plugin") version "2.3.0"
     kotlin("plugin.serialization") version "1.9.21"
+    id("org.flywaydb.flyway") version "9.22.3"
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
@@ -49,13 +50,10 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-java-time:0.41.1") // Support des dates
     implementation("org.postgresql:postgresql:42.5.1") // Driver PostgreSQL
     implementation("com.zaxxer:HikariCP:5.0.1") // Gestion des connexions DB avec HikariCP
+    implementation("org.flywaydb:flyway-core:9.22.3")
 
     // 🚀 JSON Parsing
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-
-    // 🚀 Database
-    implementation("org.flywaydb:flyway-core:9.22.1") // Ajoute la dernière version de Flyway
-    implementation("org.postgresql:postgresql:42.5.4") // Assure-toi d’avoir le driver PostgreSQL
 }
 
 testing {

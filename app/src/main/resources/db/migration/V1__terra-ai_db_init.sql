@@ -35,6 +35,7 @@ CREATE TABLE auth_password (
 -- Table pour stocker les requêtes de génération
 CREATE TABLE generation_requests (
                                      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                                     request_id VARCHAR(255) NOT NULL,
                                      user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
                                      model VARCHAR(255) NOT NULL,
                                      prompt TEXT NOT NULL,
@@ -46,7 +47,7 @@ CREATE TABLE generation_requests (
 -- Table pour stocker les images générées
 CREATE TABLE generated_images (
                                   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                                  request_id UUID NOT NULL REFERENCES generation_requests(id) ON DELETE CASCADE,
+                                  generation_request_id UUID NOT NULL REFERENCES generation_requests(id) ON DELETE CASCADE,
                                   status VARCHAR(50) CHECK (status IN ('pending', 'done', 'failed')) NOT NULL DEFAULT 'pending',
                                   url TEXT,
                                   created_at TIMESTAMP DEFAULT now() NOT NULL

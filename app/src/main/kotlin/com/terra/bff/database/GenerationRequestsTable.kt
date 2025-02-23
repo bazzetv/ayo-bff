@@ -10,36 +10,41 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 
 object GenerationRequestsTable : Table("generation_requests") {
-    val id = uuid("id").autoGenerate().uniqueIndex()
+    val id = uuid("id").uniqueIndex()
     val requestId = varchar("request_id", 255).uniqueIndex()
     val userId = uuid("user_id").references(UsersTable.id)
     val prompt = text("prompt")
     val model = text("model")
+    val numImages = integer("num_images")
     val status = varchar("status", 20).default("pending") // pending, in_progress, done, failed
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
 
     override val primaryKey = PrimaryKey(id)
 
-    fun createGenerationRequest(userId: UUID, prompt: String, model: String, numImages: Int): String {
-        val requestId = "gen_${System.currentTimeMillis()}_${UUID.randomUUID().toString().take(8)}"
-
+    fun createGenerationRequest(requestId: String, userId: UUID, prompt: String, model: String, numImages: Int) {
         transaction {
+            // 🔹 Générer un UUID manuellement
+            val generatedRequestId = UUID.randomUUID()
+
+            // 🔹 Insérer la requête de génération avec cet UUID
             GenerationRequestsTable.insert {
+                it[id] = generatedRequestId // ✅ Utilisation de l'UUID généré
                 it[GenerationRequestsTable.requestId] = requestId
                 it[GenerationRequestsTable.userId] = userId
                 it[GenerationRequestsTable.prompt] = prompt
                 it[GenerationRequestsTable.model] = model
+                it[GenerationRequestsTable.numImages] = numImages
                 it[GenerationRequestsTable.status] = "pending"
             }
 
+            // 🔹 Insérer les images avec le bon UUID
             repeat(numImages) {
                 GeneratedImagesTable.insert {
-                    it[GeneratedImagesTable.requestId] = requestId
-                    it[GeneratedImagesTable.status] = "pending"
+                    it[generationRequestId] = generatedRequestId // ✅ Utiliser l'UUID
+                    it[status] = "pending"
                 }
             }
         }
-        return requestId
     }
 }
 
