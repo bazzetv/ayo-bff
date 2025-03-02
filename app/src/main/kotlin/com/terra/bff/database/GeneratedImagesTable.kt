@@ -1,6 +1,6 @@
 package com.terra.bff.database
 
-import com.terra.bff.routes.ImageUpdate
+import ReplicateResponse
 import com.terra.bff.utils.UUIDSerializer
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
@@ -14,8 +14,11 @@ import java.util.*
 object GeneratedImagesTable : Table("generated_images") {
     val id = uuid("id").autoGenerate().uniqueIndex()
     val generationRequestId = uuid("generation_request_id").references(GenerationRequestsTable.id)
+    val userId = uuid("user_id").references(UsersTable.id)
+    val replicateImageId = varchar("replicate_image_id", 255).nullable().uniqueIndex()
     val url = text("url").nullable()
-    val status = varchar("status", 20).default("pending") // pending, done, failed
+    val status = varchar("status", 50).default("pending")
+        .check { it inList listOf("pending", "uploaded", "failed") }
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
 
     override val primaryKey = PrimaryKey(id)
@@ -25,6 +28,9 @@ object GeneratedImagesTable : Table("generated_images") {
         val id: String,
         @Serializable(with = UUIDSerializer::class)
         val generationRequestId: UUID,
+        @Serializable(with = UUIDSerializer::class)
+        val userId: UUID,
+        val replicateImageId: String?,
         val prompt: String,
         val status: String,
         val created_at: String,
@@ -36,7 +42,7 @@ object GeneratedImagesTable : Table("generated_images") {
             (GeneratedImagesTable innerJoin GenerationRequestsTable)
                 .select {
                     if (requestId != null) {
-                        GenerationRequestsTable.requestId eq requestId // ✅ Correction ici
+                        GenerationRequestsTable.requestId eq requestId
                     } else {
                         GenerationRequestsTable.userId eq userId
                     }
@@ -45,6 +51,8 @@ object GeneratedImagesTable : Table("generated_images") {
                     GeneratedImageResponse(
                         id = it[GeneratedImagesTable.id].toString(),
                         generationRequestId = it[GeneratedImagesTable.generationRequestId],
+                        userId = it[GeneratedImagesTable.userId],
+                        replicateImageId = it[GeneratedImagesTable.replicateImageId],
                         prompt = it[GenerationRequestsTable.prompt],
                         status = it[GeneratedImagesTable.status],
                         created_at = it[GeneratedImagesTable.createdAt].toString(),
@@ -54,24 +62,31 @@ object GeneratedImagesTable : Table("generated_images") {
         }
     }
 
-    fun updateImagesStatus(requestId: String, images: List<ImageUpdate>) {
+    fun updateImagesFromReplicateResponse(request: ReplicateResponse) {
         transaction {
-            val existingImages = (GeneratedImagesTable innerJoin GenerationRequestsTable)
-                .select { GenerationRequestsTable.requestId eq requestId }
-                .orderBy(GeneratedImagesTable.id)
-                .map { it[GeneratedImagesTable.id] }
+            val generationRequestId = GenerationRequestsTable
+                .slice(GenerationRequestsTable.id)
+                .select { GenerationRequestsTable.requestId eq request.id }
+                .singleOrNull()?.get(GenerationRequestsTable.id)
 
-            if (existingImages.size != images.size) {
-                throw IllegalStateException("Nombre d'images reçues (${images.size}) ne correspond pas à celles en BDD (${existingImages.size})")
-            }
-
-            existingImages.zip(images).forEach { (imageId, newData) ->
-                GeneratedImagesTable.update({ GeneratedImagesTable.id eq imageId }) {
-                    it[status] = newData.status
-                    if (newData.url != null) {
-                        it[url] = newData.url
+            if (generationRequestId != null) {
+                GenerationRequestsTable.update({ GenerationRequestsTable.id eq generationRequestId }) {
+                    it[replicateStatus] = request.status
+                    if (request.error != null) {
+                        it[errorMessage] = request.error
                     }
                 }
+
+                if (request.status == "succeeded" && request.output != null) {
+                    request.output.forEachIndexed { index, imageUrl ->
+                        GeneratedImagesTable.update({ GeneratedImagesTable.generationRequestId eq generationRequestId }) {
+                            it[status] = "uploaded"
+                            it[url] = imageUrl
+                        }
+                    }
+                }
+            } else {
+                println("⚠️ Aucun generationRequestId trouvé pour requestId = ${request.id}")
             }
         }
     }

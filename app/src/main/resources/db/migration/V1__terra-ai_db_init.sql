@@ -35,27 +35,30 @@ CREATE TABLE auth_password (
 -- Table pour stocker les requêtes de génération
 CREATE TABLE generation_requests (
                                      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                                     request_id VARCHAR(255) NOT NULL,
+                                     request_id VARCHAR(255) UNIQUE NOT NULL, -- Index pour retrouver les requêtes plus vite
                                      user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
                                      model VARCHAR(255) NOT NULL,
                                      prompt TEXT NOT NULL,
                                      num_images INTEGER NOT NULL CHECK (num_images > 0),
-                                     status VARCHAR(50) CHECK (status IN ('pending', 'done', 'failed')) NOT NULL DEFAULT 'pending',
-                                     created_at TIMESTAMP DEFAULT now() NOT NULL
+                                     webhook_url TEXT NOT NULL, -- URL du webhook pour Replicate
+                                     replicate_status VARCHAR(50) CHECK (replicate_status IN ('starting', 'processing', 'succeeded', 'failed')) NOT NULL DEFAULT 'starting',
+                                     error_message TEXT, -- Stocker les erreurs si l'API Replicate échoue
+                                     created_at TIMESTAMP DEFAULT now() NOT NULL,
+                                     updated_at TIMESTAMP DEFAULT now() NOT NULL
 );
 
--- Table pour stocker les images générées
+-- Table des images générées
 CREATE TABLE generated_images (
                                   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
                                   generation_request_id UUID NOT NULL REFERENCES generation_requests(id) ON DELETE CASCADE,
-                                  status VARCHAR(50) CHECK (status IN ('pending', 'done', 'failed')) NOT NULL DEFAULT 'pending',
-                                  url TEXT,
+                                  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE, -- Ajout pour faciliter les requêtes par utilisateur
+                                  replicate_image_id VARCHAR(255) UNIQUE, -- ID donné par Replicate si applicable
+                                  status VARCHAR(50) CHECK (status IN ('pending', 'uploaded', 'failed')) NOT NULL DEFAULT 'pending',
+                                  url TEXT, -- URL de l'image sur GCS
                                   created_at TIMESTAMP DEFAULT now() NOT NULL
 );
 
--- Index pour accélérer les recherches
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_auth_google_id ON auth_google(google_id);
 CREATE INDEX idx_auth_apple_id ON auth_apple(apple_id);
-CREATE INDEX idx_generation_status ON generation_requests(status);
 CREATE INDEX idx_generated_images_status ON generated_images(status);

@@ -10,7 +10,7 @@ import java.util.*
 
 // Table principale des utilisateurs
 object UsersTable : Table("users") {
-    val id = uuid("id")
+    val id = uuid("id").uniqueIndex()
     val email = varchar("email", 255).uniqueIndex()
     val name = varchar("name", 255).nullable()
     val createdAt = timestamp("created_at").default(Instant.now())

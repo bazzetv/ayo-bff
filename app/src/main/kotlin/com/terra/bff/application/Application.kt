@@ -3,6 +3,7 @@ package com.terra.bff.application
 import com.terra.bff.database.DatabaseFactory
 import com.terra.bff.routes.authRoutes
 import com.terra.bff.routes.generateRoutes
+import com.terra.bff.routes.webhookRoutes
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -37,5 +38,6 @@ fun Application.module() {
     routing {
         authRoutes()
         generateRoutes()
+        webhookRoutes()
     }
 }

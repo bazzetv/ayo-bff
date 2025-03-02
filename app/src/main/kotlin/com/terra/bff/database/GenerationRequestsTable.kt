@@ -1,7 +1,5 @@
 package com.terra.bff.database
 
-import com.terra.bff.utils.UUIDSerializer
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
@@ -15,47 +13,42 @@ object GenerationRequestsTable : Table("generation_requests") {
     val userId = uuid("user_id").references(UsersTable.id)
     val prompt = text("prompt")
     val model = text("model")
-    val numImages = integer("num_images")
-    val status = varchar("status", 20).default("pending") // pending, in_progress, done, failed
+    val numImages = integer("num_images").check { it greater 0 }
+    val webhookUrl = text("webhook_url")
+    val replicateStatus = varchar("replicate_status", 50).default("starting")
+        .check { it inList listOf("starting", "processing", "succeeded", "failed") }
+    val errorMessage = text("error_message").nullable()
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
+    val updatedAt = datetime("updated_at").defaultExpression(CurrentDateTime)
 
     override val primaryKey = PrimaryKey(id)
 
-    fun createGenerationRequest(requestId: String, userId: UUID, prompt: String, model: String, numImages: Int) {
+    fun createGenerationRequest(requestId: String, userId: UUID, prompt: String, model: String, numImages: Int, webhookUrl: String) {
         transaction {
-            // 🔹 Générer un UUID manuellement
             val generatedRequestId = UUID.randomUUID()
 
-            // 🔹 Insérer la requête de génération avec cet UUID
-            GenerationRequestsTable.insert {
-                it[id] = generatedRequestId // ✅ Utilisation de l'UUID généré
-                it[GenerationRequestsTable.requestId] = requestId
-                it[GenerationRequestsTable.userId] = userId
-                it[GenerationRequestsTable.prompt] = prompt
-                it[GenerationRequestsTable.model] = model
-                it[GenerationRequestsTable.numImages] = numImages
-                it[GenerationRequestsTable.status] = "pending"
-            }
+            transaction {
+                // 🔹 Insérer la requête de génération avec l'UUID généré
+                GenerationRequestsTable.insert {
+                    it[id] = generatedRequestId
+                    it[GenerationRequestsTable.requestId] = requestId
+                    it[GenerationRequestsTable.userId] = userId
+                    it[GenerationRequestsTable.prompt] = prompt
+                    it[GenerationRequestsTable.model] = model
+                    it[GenerationRequestsTable.numImages] = numImages
+                    it[GenerationRequestsTable.webhookUrl] = webhookUrl
+                    it[GenerationRequestsTable.replicateStatus] = "starting"
+                }
 
-            // 🔹 Insérer les images avec le bon UUID
-            repeat(numImages) {
-                GeneratedImagesTable.insert {
-                    it[generationRequestId] = generatedRequestId // ✅ Utiliser l'UUID
-                    it[status] = "pending"
+                // 🔹 Insérer les images avec le bon requestId
+                repeat(numImages) {
+                    GeneratedImagesTable.insert {
+                        it[generationRequestId] = generatedRequestId
+                        it[GeneratedImagesTable.userId] = userId
+                        it[status] = "pending"
+                    }
                 }
             }
         }
     }
 }
-
-
-
-@Serializable
-data class GenerationRequest(
-    val requestId: String,
-    @Serializable(with = UUIDSerializer::class)
-    val userId: UUID,
-    val prompt: String,
-    val status: String,
-    val createdAt: String
-)
