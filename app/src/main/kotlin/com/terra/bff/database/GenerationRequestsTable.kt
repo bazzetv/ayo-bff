@@ -14,8 +14,7 @@ object GenerationRequestsTable : Table("generation_requests") {
     val prompt = text("prompt")
     val model = text("model")
     val numImages = integer("num_images").check { it greater 0 }
-    val webhookUrl = text("webhook_url")
-    val replicateStatus = varchar("replicate_status", 50).default("starting")
+    val status = varchar("status", 50).default("starting")
         .check { it inList listOf("starting", "processing", "succeeded", "failed") }
     val errorMessage = text("error_message").nullable()
     val createdAt = datetime("created_at").defaultExpression(CurrentDateTime)
@@ -23,7 +22,7 @@ object GenerationRequestsTable : Table("generation_requests") {
 
     override val primaryKey = PrimaryKey(id)
 
-    fun createGenerationRequest(requestId: String, userId: UUID, prompt: String, model: String, numImages: Int, webhookUrl: String) {
+    fun createGenerationRequest(requestId: String, userId: UUID, prompt: String, model: String, numImages: Int) {
         transaction {
             val generatedRequestId = UUID.randomUUID()
 
@@ -36,8 +35,7 @@ object GenerationRequestsTable : Table("generation_requests") {
                     it[GenerationRequestsTable.prompt] = prompt
                     it[GenerationRequestsTable.model] = model
                     it[GenerationRequestsTable.numImages] = numImages
-                    it[GenerationRequestsTable.webhookUrl] = webhookUrl
-                    it[GenerationRequestsTable.replicateStatus] = "starting"
+                    it[GenerationRequestsTable.status] = "starting"
                 }
 
                 // 🔹 Insérer les images avec le bon requestId

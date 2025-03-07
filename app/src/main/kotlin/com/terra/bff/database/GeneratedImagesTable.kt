@@ -1,7 +1,9 @@
 package com.terra.bff.database
 
+import GCSUploader
 import ReplicateResponse
 import com.terra.bff.utils.UUIDSerializer
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
@@ -71,7 +73,7 @@ object GeneratedImagesTable : Table("generated_images") {
 
             if (generationRequestId != null) {
                 GenerationRequestsTable.update({ GenerationRequestsTable.id eq generationRequestId }) {
-                    it[replicateStatus] = request.status
+                    it[status] = request.status
                     if (request.error != null) {
                         it[errorMessage] = request.error
                     }
@@ -79,9 +81,22 @@ object GeneratedImagesTable : Table("generated_images") {
 
                 if (request.status == "succeeded" && request.output != null) {
                     request.output.forEachIndexed { index, imageUrl ->
-                        GeneratedImagesTable.update({ GeneratedImagesTable.generationRequestId eq generationRequestId }) {
-                            it[status] = "uploaded"
-                            it[url] = imageUrl
+                        val gcsPath = "generated_images/${request.id}-$index.jpg"
+
+                        try {
+                            // 🔹 On upload l'image en GCS de manière synchrone (runBlocking pour attendre le résultat)
+                            val gcsUrl = runBlocking {
+                                GCSUploader.uploadFromUrl(imageUrl, gcsPath)
+                            }
+
+                            GeneratedImagesTable.update({ GeneratedImagesTable.generationRequestId eq generationRequestId }) {
+                                it[status] = "uploaded"
+                                it[url] = gcsUrl
+                            }
+
+                            println("✅ Image transférée et enregistrée en BDD: $gcsUrl")
+                        } catch (e: Exception) {
+                            println("❌ Échec de l'upload GCS pour $imageUrl: ${e.message}")
                         }
                     }
                 }

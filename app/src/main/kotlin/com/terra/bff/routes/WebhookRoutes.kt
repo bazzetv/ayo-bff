@@ -13,11 +13,11 @@ fun Route.webhookRoutes() {
     post("/webhook/replicate/generation") {
 
         val rawBody = call.receiveText()
-        println("🔍 Webhook Received Body: $rawBody")
 
         val request = Json { ignoreUnknownKeys = true }.decodeFromString<ReplicateResponse>(rawBody)
 
         try {
+
             GeneratedImagesTable.updateImagesFromReplicateResponse(request)
             call.respond(HttpStatusCode.OK, "Mise à jour effectuée avec succès.")
         } catch (e: Exception) {

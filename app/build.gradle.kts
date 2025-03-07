@@ -55,6 +55,10 @@ dependencies {
 
     // 🚀 JSON Parsing
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+    // GCS
+    implementation("com.google.cloud:google-cloud-storage:2.26.0")
+    implementation("software.amazon.awssdk:s3:2.20.34")
 }
 
 testing {

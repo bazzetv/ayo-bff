@@ -40,8 +40,7 @@ CREATE TABLE generation_requests (
                                      model VARCHAR(255) NOT NULL,
                                      prompt TEXT NOT NULL,
                                      num_images INTEGER NOT NULL CHECK (num_images > 0),
-                                     webhook_url TEXT NOT NULL, -- URL du webhook pour Replicate
-                                     replicate_status VARCHAR(50) CHECK (replicate_status IN ('starting', 'processing', 'succeeded', 'failed')) NOT NULL DEFAULT 'starting',
+                                     status VARCHAR(50) CHECK (status IN ('starting', 'processing', 'succeeded', 'failed')) NOT NULL DEFAULT 'starting',
                                      error_message TEXT, -- Stocker les erreurs si l'API Replicate échoue
                                      created_at TIMESTAMP DEFAULT now() NOT NULL,
                                      updated_at TIMESTAMP DEFAULT now() NOT NULL

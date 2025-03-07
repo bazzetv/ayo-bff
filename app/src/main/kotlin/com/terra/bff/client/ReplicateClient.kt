@@ -12,7 +12,7 @@ class ReplicateClient(apiPath: String) {
     private val client = HttpClient()
     private val apiKey: String = System.getenv("REPLICATE_API_KEY") ?: throw IllegalStateException("Missing REPLICATE_API_KEY env variable")
     private val baseUrl = "https://api.replicate.com/" + apiPath
-    private val callbackUrl = "https://2c2a-2a01-e0a-da9-e630-c841-6600-5bca-e9f8.ngrok-free.app/webhook/replicate/generation"
+    private val callbackUrl = "https://4306-2a01-e0a-da9-e630-20db-def9-cb0a-12e2.ngrok-free.app/webhook/replicate/generation"
 
     suspend fun generateImage(parameters: JsonElement, version: String? = null): ReplicateResponse {
         val jsonParameters = if (parameters is JsonObject) parameters

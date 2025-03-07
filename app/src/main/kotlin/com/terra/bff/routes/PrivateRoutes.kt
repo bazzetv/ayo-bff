@@ -70,15 +70,16 @@ fun Route.generateRoutes() {
 
             val response = replicateClient.generateImage(updatedParameters, version)
 
-            transaction {
-                createGenerationRequest(
+            createGenerationRequest(
                     requestId = response.id,
                     userId = userId,
                     prompt = request.prompt,
                     model = request.model,
-                    numImages = request.numImages,
-                    webhookUrl = "https://your-bff-url.com/webhook/replicate"
-                )
+                    numImages = request.numImages
+            )
+
+            if (response.status == "succeeded") {
+                GeneratedImagesTable.updateImagesFromReplicateResponse(response)
             }
 
             call.respond(HttpStatusCode.Accepted, mapOf("request_id" to response.id, "status" to "pending"))
