@@ -1,11 +1,11 @@
-package com.terra.bff.routes
+package com.ayo.bff.routes
 
-import com.terra.bff.database.AuthPasswordTable
-import com.terra.bff.database.UsersTable
-import com.terra.bff.utils.AppleAuthUtils
-import com.terra.bff.utils.JwtUtils
-import com.terra.bff.utils.JwtUtils.generateJwt
-import com.terra.bff.utils.JwtUtils.generateRefreshToken
+import com.ayo.bff.database.AuthPasswordTable
+import com.ayo.bff.database.AccountTable
+import com.ayo.bff.utils.AppleAuthUtils
+import com.ayo.bff.utils.JwtUtils
+import com.ayo.bff.utils.JwtUtils.generateJwt
+import com.ayo.bff.utils.JwtUtils.generateRefreshToken
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
@@ -36,7 +36,7 @@ data class RegisterRequest(val email: String, val password: String)
 @Serializable
 data class RegisterResponse(
     val message: String,
-    val userId: String,
+    val accountId: String,
     val token: String,
     val refreshToken: String
 )
@@ -86,11 +86,11 @@ fun Route.authRoutes() {
                 }
 
                 // ✅ Recherche ou création de l'utilisateur
-                val userId = UsersTable.findOrCreateUserByAppleId(requestEmail, request.appleId)
+                val accountId = AccountTable.findOrCreateAccountByAppleId(requestEmail, request.appleId)
 
                 // ✅ Génération des tokens
-                val accessToken = generateJwt(userId, requestEmail)
-                val refreshToken = generateRefreshToken(userId, requestEmail)
+                val accessToken = generateJwt(accountId, requestEmail)
+                val refreshToken = generateRefreshToken(accountId, requestEmail)
 
                 call.respond(HttpStatusCode.OK, mapOf("token" to accessToken, "refreshToken" to refreshToken))
             } catch (e: Exception) {
@@ -101,33 +101,33 @@ fun Route.authRoutes() {
 
         post("/register") {
             val request = call.receive<RegisterRequest>()
-            val existingUser = transaction {
-                UsersTable.select { UsersTable.email eq request.email }.firstOrNull()
+            val existingaccount = transaction {
+                AccountTable.select { AccountTable.email eq request.email }.firstOrNull()
             }
 
-            if (existingUser != null) {
+            if (existingaccount != null) {
                 call.respond(HttpStatusCode.Conflict, "Un utilisateur avec cet email existe déjà.")
                 return@post
             }
 
-            val userId = UUID.randomUUID()
+            val accountId = UUID.randomUUID()
             val hashedPassword = BCrypt.hashpw(request.password, BCrypt.gensalt())
 
             transaction {
-                UsersTable.insert {
-                    it[id] = userId
+                AccountTable.insert {
+                    it[id] = accountId
                     it[email] = request.email
                 }
                 AuthPasswordTable.insert {
-                    it[AuthPasswordTable.userId] = userId
+                    it[AuthPasswordTable.accountId] = accountId
                     it[passwordHash] = hashedPassword
                 }
             }
 
-            val accessToken = generateJwt(userId, request.email)
-            val refreshToken = generateRefreshToken(userId, request.email)
+            val accessToken = generateJwt(accountId, request.email)
+            val refreshToken = generateRefreshToken(accountId, request.email)
 
-            call.respond(HttpStatusCode.Created, RegisterResponse("Utilisateur créé avec succès", userId.toString(), accessToken, refreshToken))
+            call.respond(HttpStatusCode.Created, RegisterResponse("Utilisateur créé avec succès", accountId.toString(), accessToken, refreshToken))
         }
 
         get("/callback") {
@@ -152,18 +152,18 @@ fun Route.authRoutes() {
                 val accessToken = json["access_token"]?.jsonPrimitive?.contentOrNull
                     ?: return@get call.respond(HttpStatusCode.Unauthorized, "Échec de l'échange du token")
 
-                val userInfo: String = client.get("https://www.googleapis.com/oauth2/v2/userinfo") {
+                val accountInfo: String = client.get("https://www.googleapis.com/oauth2/v2/accountinfo") {
                     header("Authorization", "Bearer $accessToken")
                 }.body()
 
-                val userJson = Json.parseToJsonElement(userInfo).jsonObject
-                val googleId = userJson["id"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "ID utilisateur manquant")
-                val email = userJson["email"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "Email utilisateur manquant")
+                val accountJson = Json.parseToJsonElement(accountInfo).jsonObject
+                val googleId = accountJson["id"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "ID utilisateur manquant")
+                val email = accountJson["email"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "Email utilisateur manquant")
 
-                val userId = UsersTable.findOrCreateUserByGoogleId(email, googleId)
+                val accountId = AccountTable.findOrCreateAccountByGoogleId(email, googleId)
 
-                val accessTokenJwt = generateJwt(userId, email)
-                val refreshToken = generateRefreshToken(userId, email)
+                val accessTokenJwt = generateJwt(accountId, email)
+                val refreshToken = generateRefreshToken(accountId, email)
 
                 call.respondRedirect("$frontendRedirectUri?token=$accessTokenJwt&refreshToken=$refreshToken")
             } catch (e: Exception) {

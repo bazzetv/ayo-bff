@@ -1,9 +1,8 @@
-package com.terra.bff.application
+package com.ayo.bff.application
 
-import com.terra.bff.database.DatabaseFactory
-import com.terra.bff.routes.authRoutes
-import com.terra.bff.routes.generateRoutes
-import com.terra.bff.routes.webhookRoutes
+import com.ayo.bff.database.DatabaseFactory
+import com.ayo.bff.routes.authRoutes
+import com.ayo.bff.routes.generateRoutes
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -12,10 +11,6 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.routing.*
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-
-val log: Logger = LoggerFactory.getLogger("TerraAI")
 
 fun main() {
     DatabaseFactory.init()
@@ -38,6 +33,5 @@ fun Application.module() {
     routing {
         authRoutes()
         generateRoutes()
-        webhookRoutes()
     }
 }

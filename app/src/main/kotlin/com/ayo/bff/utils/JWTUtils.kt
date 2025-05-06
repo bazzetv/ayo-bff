@@ -1,4 +1,4 @@
-package com.terra.bff.utils
+package com.ayo.bff.utils
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm

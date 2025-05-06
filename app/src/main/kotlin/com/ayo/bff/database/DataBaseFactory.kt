@@ -1,4 +1,4 @@
-package com.terra.bff.database
+package com.ayo.bff.database
 
 import org.jetbrains.exposed.sql.Database
 import com.zaxxer.hikari.HikariConfig
@@ -7,7 +7,7 @@ import org.flywaydb.core.Flyway
 
 object DatabaseFactory {
     private val config = HikariConfig().apply {
-        jdbcUrl = System.getenv("DATABASE_URL") ?: "jdbc:postgresql://localhost:5432/terraai"
+        jdbcUrl = System.getenv("DATABASE_URL") ?: "jdbc:postgresql://localhost:5432/ayo"
         driverClassName = "org.postgresql.Driver"
         username = System.getenv("DATABASE_USER") ?: "postgres"
         password = System.getenv("DATABASE_PASSWORD") ?: "password"

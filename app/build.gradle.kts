@@ -7,12 +7,10 @@
  */
 
 plugins {
-    // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    alias(libs.plugins.kotlin.jvm)
-    id("io.ktor.plugin") version "2.3.0"
-    kotlin("plugin.serialization") version "1.9.21"
+    kotlin("jvm") version "1.9.22"
+    id("io.ktor.plugin") version "2.3.7"
+    kotlin("plugin.serialization") version "1.9.22"
     id("org.flywaydb.flyway") version "9.22.3"
-    // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
 
@@ -65,7 +63,6 @@ testing {
     suites {
         // Configure the built-in test suite
         val test by getting(JvmTestSuite::class) {
-            // Use Kotlin Test test framework
             useKotlinTest("2.0.21")
         }
     }
@@ -80,5 +77,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "com.terra.bff.application.ApplicationKt"
+    mainClass = "com.ayo.bff.application.ApplicationKt"
 }

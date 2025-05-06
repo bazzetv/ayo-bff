@@ -1,4 +1,4 @@
-package com.terra.bff.utils
+package com.ayo.bff.utils
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

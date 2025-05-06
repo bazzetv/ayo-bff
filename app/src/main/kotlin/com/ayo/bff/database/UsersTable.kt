@@ -1,4 +1,4 @@
-package com.terra.bff.database
+package com.ayo.bff.database
 
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.insert
@@ -8,8 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.Instant
 import java.util.*
 
-// Table principale des utilisateurs
-object UsersTable : Table("users") {
+object AccountTable : Table("account") {
     val id = uuid("id").uniqueIndex()
     val email = varchar("email", 255).uniqueIndex()
     val name = varchar("name", 255).nullable()
@@ -17,17 +16,17 @@ object UsersTable : Table("users") {
 
     override val primaryKey = PrimaryKey(id)
 
-    fun findOrCreateUserByGoogleId(email: String, googleId: String): UUID {
+    fun findOrCreateAccountByGoogleId(email: String, googleId: String): UUID {
         return transaction {
-            UsersTable.select { UsersTable.email eq email }.singleOrNull()?.get(UsersTable.id)
+            AccountTable.select { AccountTable.email eq email }.singleOrNull()?.get(AccountTable.id)
                 ?: run {
                     val newId = UUID.randomUUID()
-                    UsersTable.insert {
+                    AccountTable.insert {
                         it[id] = newId
-                        it[UsersTable.email] = email
+                        it[AccountTable.email] = email
                     }
                     AuthGoogleTable.insert {
-                        it[userId] = newId
+                        it[accountId] = newId
                         it[AuthGoogleTable.googleId] = googleId
                     }
                     newId
@@ -35,18 +34,18 @@ object UsersTable : Table("users") {
         }
     }
 
-    fun findOrCreateUserByAppleId(email: String, appleId: String?): UUID {
+    fun findOrCreateAccountByAppleId(email: String, appleId: String?): UUID {
         return transaction {
-            UsersTable.select { UsersTable.email eq email }.singleOrNull()?.get(UsersTable.id)
+            AccountTable.select { AccountTable.email eq email }.singleOrNull()?.get(AccountTable.id)
                 ?: run {
                     val newId = UUID.randomUUID()
-                    UsersTable.insert {
+                    AccountTable.insert {
                         it[id] = newId
-                        it[UsersTable.email] = email
+                        it[AccountTable.email] = email
                     }
                     if (appleId != null) {
                         AuthAppleTable.insert {
-                            it[userId] = newId
+                            it[accountId] = newId
                             it[AuthAppleTable.appleId] = appleId
                         }
                     }
@@ -56,25 +55,23 @@ object UsersTable : Table("users") {
     }
 }
 
-// Table pour les utilisateurs Google
 object AuthGoogleTable : Table("auth_google") {
-    val userId = uuid("user_id").references(UsersTable.id)
+    val accountId = uuid("account_id").references(AccountTable.id)
     val googleId = varchar("google_id", 255).uniqueIndex()
 
-    override val primaryKey = PrimaryKey(userId)
+    override val primaryKey = PrimaryKey(accountId)
 }
 
-// Table pour les utilisateurs classiques (email + mot de passe)
 object AuthPasswordTable : Table("auth_password") {
-    val userId = uuid("user_id").references(UsersTable.id)
+    val accountId = uuid("account_id").references(AccountTable.id)
     val passwordHash = varchar("password_hash", 255)
 
-    override val primaryKey = PrimaryKey(userId)
+    override val primaryKey = PrimaryKey(accountId)
 }
 
 object AuthAppleTable : Table("auth_apple") {
-    val userId = uuid("user_id").references(UsersTable.id)
+    val accountId = uuid("account_id").references(AccountTable.id)
     val appleId = varchar("apple_id", 255).uniqueIndex()
 
-    override val primaryKey = PrimaryKey(userId)
+    override val primaryKey = PrimaryKey(accountId)
 }

@@ -1,4 +1,4 @@
-package com.terra.bff.utils
+package com.ayo.bff.utils
 
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -20,7 +20,7 @@ object AppleAuthUtils {
 
     suspend fun verifyIdentityToken(identityToken: String, applePublicKeyUrl: String): Boolean {
         try {
-            val response: HttpResponse = client.get(applePublicKeyUrl)
+            val response: HttpResponse = com.ayo.bff.utils.AppleAuthUtils.client.get(applePublicKeyUrl)
             val jsonResponse = response.bodyAsText()
             val jsonKeys = Json.parseToJsonElement(jsonResponse).jsonObject["keys"]?.jsonArray ?: return false
 
@@ -38,10 +38,10 @@ object AppleAuthUtils {
             val modulus = key.jsonObject["n"]?.jsonPrimitive?.contentOrNull ?: return false
             val exponent = key.jsonObject["e"]?.jsonPrimitive?.contentOrNull ?: return false
 
-            val publicKey = generatePublicKey(modulus, exponent)
+            val publicKey = com.ayo.bff.utils.AppleAuthUtils.generatePublicKey(modulus, exponent)
 
             // ✅ Vérifier la signature du token
-            return verifyJwtSignature(identityToken, publicKey)
+            return com.ayo.bff.utils.AppleAuthUtils.verifyJwtSignature(identityToken, publicKey)
         } catch (e: Exception) {
             return false
         }
