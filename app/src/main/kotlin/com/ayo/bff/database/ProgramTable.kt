@@ -2,71 +2,66 @@ package com.ayo.bff.database
 
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
-import org.jetbrains.exposed.sql.ColumnType
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.javatime.datetime
 import org.postgresql.util.PGobject
 
-enum class Sex {
-    MALE,
-    FEMALE
-}
-
+enum class Sex { MALE, FEMALE }
 enum class TargetMuscle {
-    CHEST,
-    BACK,
-    LEGS,
-    SHOULDERS,
-    BICEPS,
-    TRICEPS,
-    CORE,
-    GLUTES,
-    CALVES,
-    FULL_BODY
+    CHEST, BACK, LEGS, SHOULDERS, BICEPS, TRICEPS,
+    CORE, GLUTES, CALVES, FULL_BODY
 }
-
 enum class Equipment {
-    BODYWEIGHT,
-    DUMBBELL,
-    BARBELL,
-    KETTLEBELL,
-    MACHINE,
-    CABLE,
-    BAND,
-    OTHER
+    BODYWEIGHT, DUMBBELL, BARBELL, KETTLEBELL,
+    MACHINE, CABLE, BAND, OTHER
+}
+enum class Category {
+    BODYBUILDING, POWERBUILDING, BODYSHAPE, FUNCTIONAL, ENDURANCE
+}
+enum class Level {
+    BEGINNER, INTERMEDIATE, ADVANCED
 }
 
+// Table principale program
 object Program : Table("program") {
     val id = uuid("id").autoGenerate()
     val title = varchar("title", 255)
     val description = text("description")
     val durationWeeks = integer("duration_weeks")
+    val daysPerWeek = integer("days_per_week")
     val sex = registerColumn<List<String>>("sex", TextArrayColumnType())
+    val level = customEnumeration("level", "level", { Level.valueOf(it as String) }, { it.name })
+    val category = customEnumeration("category", "category", { Category.valueOf(it as String) }, { it.name })
+    val goal = text("goal").nullable()
+    val coachName = varchar("coach_name", 255).nullable()
     val structure = registerColumn<JsonElement>("structure", JsonElementColumnType())
     val imageUrl = varchar("image_url", 512)
+    val tags = registerColumn<List<String>>("tags", TextArrayColumnType()).nullable()
+    val isPublished = bool("is_published").default(false)
     val createdAt = datetime("created_at")
 
     override val primaryKey = PrimaryKey(id)
 }
 
+// JSONB handler
 class JsonElementColumnType : ColumnType() {
     override fun sqlType(): String = "JSONB"
 
     override fun valueFromDB(value: Any): JsonElement = when (value) {
         is PGobject -> Json.decodeFromString(JsonElement.serializer(), value.value ?: "{}")
         is String -> Json.decodeFromString(JsonElement.serializer(), value)
-        else -> throw IllegalArgumentException("Impossible de convertir en JsonElement : $value")
+        else -> error("Impossible de convertir en JsonElement : $value")
     }
 
     override fun notNullValueToDB(value: Any): Any {
-        val pgObject = PGobject()
-        pgObject.type = "jsonb"
-        pgObject.value = Json.encodeToString(JsonElement.serializer(), value as JsonElement)
-
-        return pgObject
+        return PGobject().apply {
+            type = "jsonb"
+            this.value = Json.encodeToString(JsonElement.serializer(), value as JsonElement)
+        }
     }
 }
 
+// TEXT[] handler
 class TextArrayColumnType : ColumnType() {
     override fun sqlType(): String = "TEXT[]"
 
