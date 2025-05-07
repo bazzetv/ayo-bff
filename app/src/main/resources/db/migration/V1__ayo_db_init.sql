@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS auth_password;
 DROP TABLE IF EXISTS auth_google;
 DROP TABLE IF EXISTS auth_apple;
+DROP TABLE IF EXISTS progress;
 DROP TABLE IF EXISTS account;
 
 CREATE TABLE account (

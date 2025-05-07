@@ -1,16 +1,21 @@
 package com.ayo.bff.database
 
-import kotlinx.serialization.json.Json
+import com.ayo.bff.utils.JsonElementColumnType
+import com.ayo.bff.utils.TextArrayColumnType
+import com.ayo.bff.utils.UUIDSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.datetime
-import org.postgresql.util.PGobject
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
+import java.util.UUID
 
-enum class Sex { MALE, FEMALE }
 enum class TargetMuscle {
     CHEST, BACK, LEGS, SHOULDERS, BICEPS, TRICEPS,
     CORE, GLUTES, CALVES, FULL_BODY
 }
+
 enum class Equipment {
     BODYWEIGHT, DUMBBELL, BARBELL, KETTLEBELL,
     MACHINE, CABLE, BAND, OTHER
@@ -23,13 +28,12 @@ enum class Level {
 }
 
 // Table principale program
-object Program : Table("program") {
+object ProgramTable : Table("program") {
     val id = uuid("id").autoGenerate()
     val title = varchar("title", 255)
     val description = text("description")
     val durationWeeks = integer("duration_weeks")
     val daysPerWeek = integer("days_per_week")
-    val sex = registerColumn<List<String>>("sex", TextArrayColumnType())
     val level = customEnumeration("level", "level", { Level.valueOf(it as String) }, { it.name })
     val category = customEnumeration("category", "category", { Category.valueOf(it as String) }, { it.name })
     val goal = text("goal").nullable()
@@ -39,44 +43,43 @@ object Program : Table("program") {
     val tags = registerColumn<List<String>>("tags", TextArrayColumnType()).nullable()
     val isPublished = bool("is_published").default(false)
     val createdAt = datetime("created_at")
-
     override val primaryKey = PrimaryKey(id)
-}
 
-// JSONB handler
-class JsonElementColumnType : ColumnType() {
-    override fun sqlType(): String = "JSONB"
-
-    override fun valueFromDB(value: Any): JsonElement = when (value) {
-        is PGobject -> Json.decodeFromString(JsonElement.serializer(), value.value ?: "{}")
-        is String -> Json.decodeFromString(JsonElement.serializer(), value)
-        else -> error("Impossible de convertir en JsonElement : $value")
-    }
-
-    override fun notNullValueToDB(value: Any): Any {
-        return PGobject().apply {
-            type = "jsonb"
-            this.value = Json.encodeToString(JsonElement.serializer(), value as JsonElement)
+    fun fetchAllPublishedPrograms(): List<ProgramPreviewDto> {
+        return transaction {
+            ProgramTable
+                .select { isPublished eq true }
+                .map {
+                    ProgramPreviewDto(
+                        id = it[ProgramTable.id],
+                        title = it[title],
+                        description = it[description],
+                        durationWeeks = it[durationWeeks],
+                        daysPerWeek = it[daysPerWeek],
+                        level = it[level],
+                        category = it[category],
+                        goal = it[goal],
+                        coachName = it[coachName],
+                        imageUrl = it[imageUrl],
+                        tags = it[tags] ?: emptyList()
+                    )
+                }
         }
     }
 }
 
-// TEXT[] handler
-class TextArrayColumnType : ColumnType() {
-    override fun sqlType(): String = "TEXT[]"
-
-    override fun valueFromDB(value: Any): List<String> = when (value) {
-        is PGobject -> value.value?.removeSurrounding("{", "}")?.split(",") ?: emptyList()
-        is String -> value.removeSurrounding("{", "}").split(",")
-        is java.sql.Array -> (value.array as Array<*>).filterIsInstance<String>()
-        else -> error("Unsupported TEXT[] value: $value")
-    }
-
-    override fun notNullValueToDB(value: Any): Any {
-        val list = (value as List<*>).joinToString(",", "{", "}") { it.toString() }
-        return PGobject().apply {
-            type = "text[]"
-            this.value = list
-        }
-    }
-}
+@Serializable
+data class ProgramPreviewDto(
+    @Serializable(with = UUIDSerializer::class)
+    val id: UUID,
+    val title: String,
+    val description: String,
+    val durationWeeks: Int,
+    val daysPerWeek: Int,
+    val level: Level,
+    val category: Category,
+    val goal: String?,
+    val coachName: String?,
+    val imageUrl: String,
+    val tags: List<String> = emptyList()
+)

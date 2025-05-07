@@ -36,7 +36,7 @@ data class RegisterRequest(val email: String, val password: String)
 @Serializable
 data class RegisterResponse(
     val message: String,
-    val accountId: String,
+    val userId: String,
     val token: String,
     val refreshToken: String
 )
@@ -152,13 +152,13 @@ fun Route.authRoutes() {
                 val accessToken = json["access_token"]?.jsonPrimitive?.contentOrNull
                     ?: return@get call.respond(HttpStatusCode.Unauthorized, "Échec de l'échange du token")
 
-                val accountInfo: String = client.get("https://www.googleapis.com/oauth2/v2/accountinfo") {
+                val userInfo: String = client.get("https://www.googleapis.com/oauth2/v2/userinfo") {
                     header("Authorization", "Bearer $accessToken")
                 }.body()
 
-                val accountJson = Json.parseToJsonElement(accountInfo).jsonObject
-                val googleId = accountJson["id"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "ID utilisateur manquant")
-                val email = accountJson["email"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "Email utilisateur manquant")
+                val userJson = Json.parseToJsonElement(userInfo).jsonObject
+                val googleId = userJson["id"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "ID utilisateur manquant")
+                val email = userJson["email"]?.jsonPrimitive?.contentOrNull ?: return@get call.respond(HttpStatusCode.BadRequest, "Email utilisateur manquant")
 
                 val accountId = AccountTable.findOrCreateAccountByGoogleId(email, googleId)
 

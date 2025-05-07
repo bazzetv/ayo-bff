@@ -28,7 +28,6 @@ CREATE TABLE program (
   description TEXT NOT NULL,
   duration_weeks INT NOT NULL,
   days_per_week INT NOT NULL,
-  sex sex[] NOT NULL,
   level level NOT NULL,
   category category NOT NULL,
   goal TEXT,
@@ -40,21 +39,9 @@ CREATE TABLE program (
   created_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
--- Index utiles
 CREATE INDEX idx_program_category ON program(category);
 CREATE INDEX idx_program_level ON program(level);
 CREATE INDEX idx_program_tags ON program USING GIN (tags);
-
--- Table progress
-CREATE TABLE progress (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID NOT NULL,
-  program_id UUID NOT NULL REFERENCES program(id) ON DELETE CASCADE,
-  current_week INT NOT NULL,
-  current_day INT NOT NULL,
-  started_at TIMESTAMP NOT NULL DEFAULT now(),
-  finished_at TIMESTAMP
-);
 
 CREATE TABLE exercise (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -68,5 +55,13 @@ CREATE TABLE exercise (
 
 -- Indexes
 CREATE INDEX idx_program_title ON program(title);
-CREATE INDEX idx_progress_user_id ON progress(user_id);
 CREATE INDEX idx_exercise_target_muscle ON exercise(target_muscle);
+
+CREATE TABLE progress (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    account_id UUID NOT NULL REFERENCES account(id),
+    programs JSONB NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT now(),
+    updated_at TIMESTAMP NOT NULL DEFAULT now()
+);
+CREATE INDEX idx_progress_user_id ON progress(account_id);

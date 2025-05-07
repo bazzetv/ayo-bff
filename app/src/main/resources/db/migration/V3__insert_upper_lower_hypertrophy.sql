@@ -4,7 +4,6 @@ INSERT INTO program (
     description,
     duration_weeks,
     days_per_week,
-    sex,
     level,
     category,
     goal,
@@ -18,7 +17,6 @@ INSERT INTO program (
     'An intense bodybuilding 5 days / week program',
     10,
     5,
-    ARRAY['MALE', 'FEMALE']::sex[],
     'INTERMEDIATE',
     'BODYBUILDING',
     'Pure muscle gain',
@@ -2649,8 +2647,8 @@ INSERT INTO program (
          ]
        }
      ]'::jsonb,
-    '<<IMAGE_URL>>',
-    ARRAY['hypertrophy', 'upper/lower', '5days']::text[],
+    'http://localhost:9000/terra-ai-bucket/models/flux-schnell.webp',
+    ARRAY['hypertrophy', 'upper/lower', '5days', 'male', 'female']::text[],
     true
 );
 
