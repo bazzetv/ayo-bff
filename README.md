@@ -1,96 +1,89 @@
-# 📌 Terra AI - Backend & BFF Architecture
+# 🏋️ AYO-BFF — Backend For Frontend (Kotlin)
 
-## 🌍 Vue d’ensemble du projet
-Terra AI est une application permettant aux utilisateurs de générer des images personnalisées via des modèles IA après entraînement sur leurs propres photos. L’application est composée de plusieurs modules :
-
-- 📱 **Application mobile (React Native) et Web**
-- 🚀 **Backend Python (FastAPI)** pour la gestion de l’IA
-- 🔗 **Backend for Frontend (BFF) Kotlin (Ktor)** pour faciliter la communication entre le front et l’API Python
-
-## 🛠️ Fonctionnalités principales
-
-### 🔑 Authentification
-- **Connexion via Google** ou **création de compte classique**
-- Gestion des sessions utilisateur
-
-### 🎭 Optimisation de prompt
-- Un utilisateur soumet un **prompt textuel**
-- L’IA analyse et optimise ce prompt
-- L’utilisateur reçoit le prompt amélioré et peut l’accepter ou le modifier
-
-### 📸 Entraînement du modèle personnalisé
-- L’utilisateur **upload 10 à 20 images**
-- Le modèle FLUX.1-DEV est entraîné avec ces images
-- Une notification est envoyée lorsque l’entraînement est terminé
-
-### 🎨 Génération d’images IA
-- L’utilisateur fournit un **prompt texte**
-- L’image est générée avec **FLUX.1-Schnell** ou **FLUX.1-DEV** si un modèle personnalisé est disponible
-- Une notification est envoyée lorsque l’image est prête à être téléchargée
+Bienvenue dans le backend de l'application AYO, écrit en **Kotlin**. Ce BFF (Backend For Frontend) agit comme une passerelle entre le frontend mobile (Expo / React Native) et les services d’IA ou de gestion d'entraînement.
 
 ---
 
-## 📡 API & WebSockets
+## 🚀 Stack Technique
 
-### 🚀 **Backend Python (FastAPI)**
-Le backend gère :
-1. **L’optimisation de prompt**
-2. **L’entraînement du modèle personnalisé**
-3. **La génération d’image IA**
-4. **Le stockage temporaire des fichiers générés**
-
-**Endpoints principaux :**
-| Méthode | Endpoint | Description |
-|---------|----------|-------------|
-| `POST` | `/auth/login` | Authentification utilisateur via Google ou compte classique |
-| `POST` | `/prompt/optimize` | Optimisation d’un prompt utilisateur |
-| `POST` | `/training/upload` | Upload des images d’entraînement |
-| `POST` | `/training/start` | Démarrage de l’entraînement du modèle |
-| `GET` | `/generate/image` | Génération d’une image via un prompt |
-| `GET` | `/generate/download/{user_id}` | Téléchargement des images générées |
-| `GET` | `/training/status` | Statut de l’entraînement |
+- **Langage** : Kotlin
+- **Serveur** : Ktor
+- **Base de données** : PostgreSQL (via Docker)
+- **Gestion de dépendances** : Gradle
+- **Conteneurisation** : Docker / Docker Compose
 
 ---
 
-### 🔗 **Backend for Frontend (BFF) Kotlin**
-Le BFF agit comme une passerelle entre le **front** et le **backend Python**.
+## ⚙️ Prérequis
 
-**Endpoints principaux :**
-| Méthode | Endpoint | Description |
-|---------|----------|-------------|
-| `POST` | `/api/auth/login` | Redirection de l'authentification vers le backend |
-| `POST` | `/api/prompt/optimize` | Envoi du prompt à l’IA et réception de la version optimisée |
-| `POST` | `/api/training/upload` | Transfert des images vers le backend Python |
-| `POST` | `/api/training/start` | Lancement de l’entraînement |
-| `POST` | `/api/generate/image` | Génération d’images avec gestion de la file d’attente |
+Avant de lancer le projet, assure-toi d’avoir installé les outils suivants :
 
-**WebSockets pour notifications :**
-| WS Événement | Description |
-|-------------|-------------|
-| `/ws/prompt` | Notifie le front lorsque le **prompt optimisé** est prêt |
-| `/ws/training` | Notifie le front lorsque **l’entraînement** est terminé |
-| `/ws/generate` | Notifie le front lorsque **l’image générée** est prête |
+### 📦 Kotlin & Gradle
+- [SDKMAN (recommandé)](https://sdkman.io/)
+  ```bash
+  curl -s "https://get.sdkman.io" | bash
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+  sdk install kotlin
+  sdk install gradle
+  ```
 
----
-
-## 📌 Ce qu’il reste à faire
-### 🔥 **Priorité 1 - Implémentation des fonctionnalités clés**
-- [ ] Finaliser l’**authentification Google**
-- [ ] Intégrer l’**optimisation de prompt**
-- [ ] Tester l’entraînement **LoRA sur FLUX.1-DEV**
-- [ ] Gérer la **génération d’images avec FLUX.1-Schnell**
-
-### 🎯 **Priorité 2 - Optimisation**
-- [ ] Ajouter **l’offloading CPU** et **float8** pour optimiser la génération sur 3070 Ti
-- [ ] Ajouter un **mécanisme de gestion de file d’attente**
-- [ ] Passer à un stockage distant (S3 ou autre) pour les fichiers d’entraînement
+### 🐳 Docker & Docker Compose
+- [Installer Docker Desktop](https://www.docker.com/products/docker-desktop/)
+    - Une fois installé, vérifie :
+  ```bash
+  docker -v
+  docker compose version
+  ```
 
 ---
 
-## 🚀 Conclusion
-Terra AI est un projet ambitieux visant à démocratiser la génération d’images personnalisées à partir d’**un modèle IA entraîné sur les propres photos des utilisateurs**. Ce document sert de guide de développement, avec un découpage clair des tâches à accomplir pour mener le projet à terme.
+## 📥 Installation & Lancement
+
+1. **Clone du dépôt**
+   ```bash
+   git clone https://github.com/bazzetv/ayo-bff.git
+   cd ayo-bff
+   ```
+
+2. **Lancer la base de données et services**
+   ```bash
+   docker compose up -d
+   ```
+
+3. **Lancer l'application Kotlin**
+   ```bash
+   ./gradlew run
+   ```
 
 ---
 
-📌 **GitHub Repository**: [bazzetv/terra-api-model](https://github.com/bazzetv/terra-api-model)  
-💡 **Contact**: [@bazzetv](https://github.com/bazzetv)
+## 📚 Structure du projet
+
+- `src/main/kotlin/` → Code principal du serveur
+- `resources/application.conf` → Configuration Ktor (ports, CORS, JWT, etc.)
+- `docker-compose.yml` → Base PostgreSQL + volumes
+- `migrations/` (si présent) → Fichiers SQL / Flyway pour initialisation BDD
+
+---
+
+## 🧪 Tests
+
+```bash
+./gradlew test
+```
+
+---
+
+## 🔒 License
+
+```
+Copyright (c) 2025 Issam BAZZE
+
+This project is licensed under the AYO License - No Commercial Use Allowed
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use
+and modify the Software for **personal and non-commercial purposes only**.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+```

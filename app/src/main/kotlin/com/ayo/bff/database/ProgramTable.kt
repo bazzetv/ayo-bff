@@ -4,11 +4,13 @@ import com.ayo.bff.utils.JsonElementColumnType
 import com.ayo.bff.utils.TextArrayColumnType
 import com.ayo.bff.utils.UUIDSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.datetime
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
+import kotlinx.serialization.json.decodeFromJsonElement
 import java.util.UUID
 
 enum class TargetMuscle {
@@ -27,7 +29,6 @@ enum class Level {
     BEGINNER, INTERMEDIATE, ADVANCED
 }
 
-// Table principale program
 object ProgramTable : Table("program") {
     val id = uuid("id").autoGenerate()
     val title = varchar("title", 255)
@@ -66,6 +67,34 @@ object ProgramTable : Table("program") {
                 }
         }
     }
+
+    fun getById(programUUID: UUID): FullProgramDTO? {
+        return transaction {
+            ProgramTable
+                .select { ProgramTable.id eq programUUID }
+                .limit(1)
+                .firstOrNull()
+                ?.let {
+                    val structureJson = it[structure]
+                    val parsedStructure = Json.decodeFromJsonElement<List<WeekDTO>>(structureJson)
+
+                    FullProgramDTO(
+                        id = it[ProgramTable.id],
+                        title = it[title],
+                        description = it[description],
+                        durationWeeks = it[durationWeeks],
+                        daysPerWeek = it[daysPerWeek],
+                        level = it[level],
+                        category = it[category],
+                        goal = it[goal],
+                        coachName = it[coachName],
+                        imageUrl = it[imageUrl],
+                        tags = it[tags] ?: emptyList(),
+                        structure = parsedStructure
+                    )
+                }
+        }
+    }
 }
 
 @Serializable
@@ -82,4 +111,44 @@ data class ProgramPreviewDto(
     val coachName: String?,
     val imageUrl: String,
     val tags: List<String> = emptyList()
+)
+
+@Serializable
+data class FullProgramDTO(
+    @Serializable(with = UUIDSerializer::class)
+    val id: UUID,
+    val title: String,
+    val description: String,
+    val durationWeeks: Int,
+    val daysPerWeek: Int,
+    val level: Level,
+    val category: Category,
+    val goal: String?,
+    val coachName: String?,
+    val imageUrl: String,
+    val tags: List<String>,
+    val structure: List<WeekDTO>
+)
+
+@Serializable
+data class WeekDTO(
+    val week: Int,
+    val days: List<DayDTO>
+)
+
+@Serializable
+data class DayDTO(
+    val name: String,
+    val exercises: List<ExerciseDTO>
+)
+
+@Serializable
+data class ExerciseDTO(
+    val name: String,
+    val equipment: String,
+    val sets: String,
+    val reps: String,
+    val rest: Int? = null,
+    val substitutions: List<String>,
+    val notes: String
 )

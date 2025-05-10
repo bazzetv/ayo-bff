@@ -1,12 +1,15 @@
 package com.ayo.bff.database
 
 import com.ayo.bff.utils.JsonElementColumnType
+import com.ayo.bff.utils.UUIDSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.*
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.javatime.timestamp
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 import java.time.Instant
 import java.util.*
 
@@ -37,40 +40,58 @@ object ProgressTable : Table("progress") {
                 .flatten()
         }
     }
+
+    fun addProgramToUser(userId: UUID, newProgress: ProgressProgramDTO) {
+        transaction {
+            val existing = ProgressTable
+                .select { accountId eq userId }
+                .firstOrNull()
+
+            if (existing != null) {
+                val currentProgress = Json.decodeFromJsonElement<List<ProgressProgramDTO>>(existing[ProgressTable.programs])
+                val updatedList = currentProgress + newProgress
+                ProgressTable.update({ accountId eq userId }) {
+                    it[programs] = Json.encodeToJsonElement(updatedList)
+                    it[updatedAt] = Instant.now()
+                }
+            } else {
+                ProgressTable.insert {
+                    it[accountId] = userId
+                    it[programs] = Json.encodeToJsonElement(listOf(newProgress))
+                    it[createdAt] = Instant.now()
+                    it[updatedAt] = Instant.now()
+                }
+            }
+        }
+    }
+
+    fun fetchUserProgress(userId: UUID): List<ProgressProgramDTO> {
+        return transaction {
+            ProgressTable
+                .select { accountId eq userId }
+                .mapNotNull { row ->
+                    try {
+                        val json = row[programs]
+                        Json.decodeFromJsonElement<List<ProgressProgramDTO>>(json)
+                    } catch (e: Exception) {
+                        // Log optionnel : e.message
+                        null
+                    }
+                }
+                .flatten()
+        }
+    }
+
+
+
 }
 
 @Serializable
 data class ProgressProgramDTO(
-    val programId: String,
+    @Serializable(with = UUIDSerializer::class)
+    val programId: UUID,
     val currentWeek: Int,
-    val currentDay: String,
-    val weeks: List<WeekProgressDTO>,
-    val finished: Boolean = false
-)
-
-@Serializable
-data class WeekProgressDTO(
-    val week: Int,
-    val days: List<DayProgressDTO>
-)
-
-@Serializable
-data class DayProgressDTO(
-    val dayName: String,
+    val currentDay: Int,
     val finished: Boolean = false,
-    val exercises: List<ExerciseProgressDTO>
-)
-
-
-@Serializable
-data class ExerciseProgressDTO(
-    val name: String,
-    val equipment: String,
-    val sets: String,
-    val reps: String,
-    val rest: Int,
-    val substitutions: List<String> = emptyList(),
-    val notes: String,
-    val finished: Boolean = false,
-    val weights: List<Float?> = emptyList()
+    val completedDays: Map<Int, List<Int>> = emptyMap()
 )
