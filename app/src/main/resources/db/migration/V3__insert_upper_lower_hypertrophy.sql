@@ -1,3 +1,5 @@
+TRUNCATE TABLE program;
+TRUNCATE TABLE exercise;
 
 INSERT INTO program (
     title,
@@ -26,7 +28,7 @@ INSERT INTO program (
          "week": 1,
          "days": [
            {
-             "day_name": "Upper #1",
+             "name": "Upper #1",
              "exercises": [
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
@@ -115,7 +117,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #1",
+             "name": "Lower #1",
              "exercises": [
                {
                  "name": "Seated Leg Curl",
@@ -180,7 +182,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Upper #2",
+             "name": "Upper #2",
              "exercises": [
                {
                  "name": "Super-ROM Overhand Cable Row",
@@ -269,7 +271,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #2",
+             "name": "Lower #2",
              "exercises": [
                {
                  "name": "Lying Leg Curl",
@@ -346,7 +348,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Arms & Weak Points",
+             "name": "Arms & Weak Points",
              "exercises": [
                {
                  "name": "Incline Cable Lateral Raise",
@@ -355,7 +357,7 @@ INSERT INTO program (
                  "reps": "8-12",
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
-                 "alternatives": [
+                 "substitutions": [
                    "DB Lateral Raise",
                    "Machine Lateral Raise"
                  ]
@@ -428,7 +430,7 @@ INSERT INTO program (
          "week": 2,
          "days": [
            {
-             "day_name": "Upper #1",
+             "name": "Upper #1",
              "exercises": [
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
@@ -517,7 +519,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #1",
+             "name": "Lower #1",
              "exercises": [
                {
                  "name": "Seated Leg Curl",
@@ -582,7 +584,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Upper #2",
+             "name": "Upper #2",
              "exercises": [
                {
                  "name": "Super-ROM Overhand Cable Row",
@@ -671,7 +673,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #2",
+             "name": "Lower #2",
              "exercises": [
                {
                  "name": "Lying Leg Curl",
@@ -748,7 +750,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Arms & Weak Points",
+             "name": "Arms & Weak Points",
              "exercises": [
                {
                  "name": "Incline Cable Lateral Raise",
@@ -757,7 +759,7 @@ INSERT INTO program (
                  "reps": "8-12",
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
-                 "alternatives": [
+                 "substitutions": [
                    "DB Lateral Raise",
                    "Machine Lateral Raise"
                  ]
@@ -830,7 +832,7 @@ INSERT INTO program (
          "week": 3,
          "days": [
            {
-             "day_name": "Upper #1",
+             "name": "Upper #1",
              "exercises": [
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
@@ -919,7 +921,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #1",
+             "name": "Lower #1",
              "exercises": [
                {
                  "name": "Seated Leg Curl",
@@ -984,7 +986,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Upper #2",
+             "name": "Upper #2",
              "exercises": [
                {
                  "name": "Super-ROM Overhand Cable Row",
@@ -1073,7 +1075,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #2",
+             "name": "Lower #2",
              "exercises": [
                {
                  "name": "Lying Leg Curl",
@@ -1150,7 +1152,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Arms & Weak Points",
+             "name": "Arms & Weak Points",
              "exercises": [
                {
                  "name": "Incline Cable Lateral Raise",
@@ -1159,7 +1161,7 @@ INSERT INTO program (
                  "reps": "8-12",
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
-                 "alternatives": [
+                 "substitutions": [
                    "DB Lateral Raise",
                    "Machine Lateral Raise"
                  ]
@@ -1232,7 +1234,7 @@ INSERT INTO program (
          "week": 4,
          "days": [
            {
-             "day_name": "Upper #1",
+             "name": "Upper #1",
              "exercises": [
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
@@ -1321,7 +1323,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #1",
+             "name": "Lower #1",
              "exercises": [
                {
                  "name": "Seated Leg Curl",
@@ -1386,7 +1388,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Upper #2",
+             "name": "Upper #2",
              "exercises": [
                {
                  "name": "Super-ROM Overhand Cable Row",
@@ -1475,7 +1477,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #2",
+             "name": "Lower #2",
              "exercises": [
                {
                  "name": "Lying Leg Curl",
@@ -1552,7 +1554,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Arms & Weak Points",
+             "name": "Arms & Weak Points",
              "exercises": [
                {
                  "name": "Incline Cable Lateral Raise",
@@ -1561,7 +1563,7 @@ INSERT INTO program (
                  "reps": "8-12",
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
-                 "alternatives": [
+                 "substitutions": [
                    "DB Lateral Raise",
                    "Machine Lateral Raise"
                  ]
@@ -1634,7 +1636,7 @@ INSERT INTO program (
          "week": 5,
          "days": [
            {
-             "day_name": "Upper #1",
+             "name": "Upper #1",
              "exercises": [
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
@@ -1723,7 +1725,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #1",
+             "name": "Lower #1",
              "exercises": [
                {
                  "name": "Seated Leg Curl",
@@ -1788,7 +1790,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Upper #2",
+             "name": "Upper #2",
              "exercises": [
                {
                  "name": "Super-ROM Overhand Cable Row",
@@ -1877,7 +1879,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #2",
+             "name": "Lower #2",
              "exercises": [
                {
                  "name": "Lying Leg Curl",
@@ -1954,7 +1956,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Arms & Weak Points",
+             "name": "Arms & Weak Points",
              "exercises": [
                {
                  "name": "Incline Cable Lateral Raise",
@@ -1963,7 +1965,7 @@ INSERT INTO program (
                  "reps": "8-12",
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
-                 "alternatives": [
+                 "substitutions": [
                    "DB Lateral Raise",
                    "Machine Lateral Raise"
                  ]
@@ -2036,7 +2038,7 @@ INSERT INTO program (
          "week": 6,
          "days": [
            {
-             "day_name": "Upper #1",
+             "name": "Upper #1",
              "exercises": [
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
@@ -2125,7 +2127,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #1",
+             "name": "Lower #1",
              "exercises": [
                {
                  "name": "Seated Leg Curl",
@@ -2190,7 +2192,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Upper #2",
+             "name": "Upper #2",
              "exercises": [
                {
                  "name": "Dual-Handle Lat Pulldown (Mid-back + Lats)",
@@ -2279,7 +2281,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #2",
+             "name": "Lower #2",
              "exercises": [
                {
                  "name": "Lying Leg Curl",
@@ -2356,7 +2358,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Arms & Weak Points",
+             "name": "Arms & Weak Points",
              "exercises": [
                {
                  "name": "Incline Cable Lateral Raise",
@@ -2365,7 +2367,7 @@ INSERT INTO program (
                  "reps": "8-12",
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
-                 "alternatives": [
+                 "substitutions": [
                    "DB Lateral Raise",
                    "Machine Lateral Raise"
                  ]
@@ -2438,7 +2440,7 @@ INSERT INTO program (
          "week": 7,
          "days": [
            {
-             "day_name": "Upper #1",
+             "name": "Upper #1",
              "exercises": [
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
@@ -2527,7 +2529,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Lower #1",
+             "name": "Lower #1",
              "exercises": [
                {
                  "name": "Seated Leg Curl",
@@ -2592,7 +2594,7 @@ INSERT INTO program (
              ]
            },
            {
-             "day_name": "Upper #2",
+             "name": "Upper #2",
              "exercises": [
                {
                  "name": "Dual-Handle Lat Pulldown (Mid-back + Lats)",
@@ -2647,7 +2649,7 @@ INSERT INTO program (
          ]
        }
      ]'::jsonb,
-    'http://localhost:9000/terra-ai-bucket/models/flux-schnell.webp',
+    'http://localhost:9000/terra-ai-bucket/ayo/programs/program2.webp',
     ARRAY['hypertrophy', 'upper/lower', '5days', 'male', 'female']::text[],
     true
 );
