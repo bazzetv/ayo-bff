@@ -1,4 +1,3 @@
-TRUNCATE TABLE program;
 TRUNCATE TABLE exercise;
 
 INSERT INTO program (
@@ -33,8 +32,8 @@ INSERT INTO program (
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cross-Body Cable Y-Raise",
@@ -45,8 +44,8 @@ INSERT INTO program (
                {
                  "name": "Cross-Body Lat Pull-Around",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Half-Kneeling 1-Arm Lat Pulldown",
@@ -57,8 +56,8 @@ INSERT INTO program (
                {
                  "name": "Low Incline Smith Machine Press",
                  "equipment": "MACHINE",
-                 "sets": "4",
-                 "reps": "8-10",
+                 "sets": 4,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Low Incline Machine Press",
@@ -69,8 +68,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported Machine Row",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Chest-Supported T-Bar Row",
@@ -81,8 +80,8 @@ INSERT INTO program (
                {
                  "name": "Overhead Cable Triceps Extension (Bar)",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "8-10",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhead Cable Triceps Extension (Rope)",
@@ -93,8 +92,8 @@ INSERT INTO program (
                {
                  "name": "Straight-Bar Lat Prayer",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Machine Lat Pullover",
@@ -105,8 +104,8 @@ INSERT INTO program (
                {
                  "name": "Pec Deck (w/ Integrated Partials)",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bent-Over Cable Pec Flye (w/ Integrated Partials)",
@@ -122,8 +121,8 @@ INSERT INTO program (
                {
                  "name": "Seated Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lying Leg Curl",
@@ -134,8 +133,8 @@ INSERT INTO program (
                {
                  "name": "Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -146,8 +145,8 @@ INSERT INTO program (
                {
                  "name": "Hack Squat",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "4, 6, 8",
+                 "sets": 3,
+                 "reps": 6,
                  "rest": 180,
                  "substitutions": [
                    "Machine Squat",
@@ -158,8 +157,8 @@ INSERT INTO program (
                {
                  "name": "Leg Extension",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Step-Up",
@@ -170,8 +169,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press Calf Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Donkey Calf Raise",
@@ -187,8 +186,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM Overhand Cable Row",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Overhand Machine Row",
@@ -199,8 +198,8 @@ INSERT INTO program (
                {
                  "name": "Machine Shoulder Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Shoulder Press",
@@ -211,8 +210,8 @@ INSERT INTO program (
                {
                  "name": "Assisted Pull-Up",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lat Pulldown",
@@ -223,8 +222,8 @@ INSERT INTO program (
                {
                  "name": "Paused Assisted Dip",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Decline Machine Chest Press",
@@ -235,8 +234,8 @@ INSERT INTO program (
                {
                  "name": "Inverse DB Zottman Curl",
                  "equipment": "DUMBBELL",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Slow-Eccentric DB Curl",
@@ -247,8 +246,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM DB Lateral Raise",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 0,
                  "substitutions": [
                    "Cable Upright Row",
@@ -259,8 +258,8 @@ INSERT INTO program (
                {
                  "name": "Cable Reverse Flye (Mechanical Dropset)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "5,4,3+",
+                 "sets": 3,
+                 "reps": 5,
                  "rest": 90,
                  "substitutions": [
                    "Reverse Pec Deck",
@@ -276,8 +275,8 @@ INSERT INTO program (
                {
                  "name": "Lying Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Leg Curl",
@@ -288,8 +287,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 90,
                  "substitutions": [
                    "Belt Squat",
@@ -300,8 +299,8 @@ INSERT INTO program (
                {
                  "name": "Paused Barbell RDL",
                  "equipment": "BARBELL",
-                 "sets": "2",
-                 "reps": "8",
+                 "sets": 2,
+                 "reps": 8,
                  "rest": 180,
                  "substitutions": [
                    "Paused DB RDL",
@@ -312,8 +311,8 @@ INSERT INTO program (
                {
                  "name": "A1: Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -324,8 +323,8 @@ INSERT INTO program (
                {
                  "name": "A2: Sissy Squat",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Leg Extension",
@@ -336,8 +335,8 @@ INSERT INTO program (
                {
                  "name": "Standing Calf Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Leg Press Calf Press",
@@ -353,8 +352,8 @@ INSERT INTO program (
                {
                  "name": "Incline Cable Lateral Raise",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "8-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
                  "substitutions": [
@@ -365,8 +364,8 @@ INSERT INTO program (
                {
                  "name": "Bayesian Cable Curl",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Incline Curl",
@@ -377,8 +376,8 @@ INSERT INTO program (
                {
                  "name": "Seated DB French Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "EZ-bar Skull Crusher",
@@ -389,8 +388,8 @@ INSERT INTO program (
                {
                  "name": "Bottom-2/3 Constant Tension Preacher Curl",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bottom-2/3 EZ-Bar Curl",
@@ -401,8 +400,8 @@ INSERT INTO program (
                {
                  "name": "Cable Triceps Kickback",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bench Dip",
@@ -413,8 +412,8 @@ INSERT INTO program (
                {
                  "name": "Cable Crunch",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Machine Crunch",
@@ -435,8 +434,8 @@ INSERT INTO program (
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cross-Body Cable Y-Raise",
@@ -447,8 +446,8 @@ INSERT INTO program (
                {
                  "name": "Cross-Body Lat Pull-Around",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Half-Kneeling 1-Arm Lat Pulldown",
@@ -459,8 +458,8 @@ INSERT INTO program (
                {
                  "name": "Low Incline Smith Machine Press",
                  "equipment": "MACHINE",
-                 "sets": "4",
-                 "reps": "8-10",
+                 "sets": 4,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Low Incline Machine Press",
@@ -471,8 +470,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported Machine Row",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Chest-Supported T-Bar Row",
@@ -483,8 +482,8 @@ INSERT INTO program (
                {
                  "name": "Overhead Cable Triceps Extension (Bar)",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "8-10",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhead Cable Triceps Extension (Rope)",
@@ -495,8 +494,8 @@ INSERT INTO program (
                {
                  "name": "Straight-Bar Lat Prayer",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Machine Lat Pullover",
@@ -507,8 +506,8 @@ INSERT INTO program (
                {
                  "name": "Pec Deck (w/ Integrated Partials)",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bent-Over Cable Pec Flye (w/ Integrated Partials)",
@@ -524,8 +523,8 @@ INSERT INTO program (
                {
                  "name": "Seated Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lying Leg Curl",
@@ -536,8 +535,8 @@ INSERT INTO program (
                {
                  "name": "Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -548,8 +547,8 @@ INSERT INTO program (
                {
                  "name": "Hack Squat",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "4, 6, 8",
+                 "sets": 3,
+                 "reps": 6,
                  "rest": 180,
                  "substitutions": [
                    "Machine Squat",
@@ -560,8 +559,8 @@ INSERT INTO program (
                {
                  "name": "Leg Extension",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Step-Up",
@@ -572,8 +571,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press Calf Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Donkey Calf Raise",
@@ -589,8 +588,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM Overhand Cable Row",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Overhand Machine Row",
@@ -601,8 +600,8 @@ INSERT INTO program (
                {
                  "name": "Machine Shoulder Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Shoulder Press",
@@ -613,8 +612,8 @@ INSERT INTO program (
                {
                  "name": "Assisted Pull-Up",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lat Pulldown",
@@ -625,8 +624,8 @@ INSERT INTO program (
                {
                  "name": "Paused Assisted Dip",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Decline Machine Chest Press",
@@ -637,8 +636,8 @@ INSERT INTO program (
                {
                  "name": "Inverse DB Zottman Curl",
                  "equipment": "DUMBBELL",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Slow-Eccentric DB Curl",
@@ -649,8 +648,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM DB Lateral Raise",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 0,
                  "substitutions": [
                    "Cable Upright Row",
@@ -661,8 +660,8 @@ INSERT INTO program (
                {
                  "name": "Cable Reverse Flye (Mechanical Dropset)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "5,4,3+",
+                 "sets": 3,
+                 "reps": 5,
                  "rest": 90,
                  "substitutions": [
                    "Reverse Pec Deck",
@@ -678,8 +677,8 @@ INSERT INTO program (
                {
                  "name": "Lying Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Leg Curl",
@@ -690,8 +689,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 90,
                  "substitutions": [
                    "Belt Squat",
@@ -702,8 +701,8 @@ INSERT INTO program (
                {
                  "name": "Paused Barbell RDL",
                  "equipment": "BARBELL",
-                 "sets": "2",
-                 "reps": "8",
+                 "sets": 2,
+                 "reps": 8,
                  "rest": 180,
                  "substitutions": [
                    "Paused DB RDL",
@@ -714,8 +713,8 @@ INSERT INTO program (
                {
                  "name": "A1: Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -726,8 +725,8 @@ INSERT INTO program (
                {
                  "name": "A2: Sissy Squat",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Leg Extension",
@@ -738,8 +737,8 @@ INSERT INTO program (
                {
                  "name": "Standing Calf Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Leg Press Calf Press",
@@ -755,8 +754,8 @@ INSERT INTO program (
                {
                  "name": "Incline Cable Lateral Raise",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "8-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
                  "substitutions": [
@@ -767,8 +766,8 @@ INSERT INTO program (
                {
                  "name": "Bayesian Cable Curl",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Incline Curl",
@@ -779,8 +778,8 @@ INSERT INTO program (
                {
                  "name": "Seated DB French Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "EZ-bar Skull Crusher",
@@ -791,8 +790,8 @@ INSERT INTO program (
                {
                  "name": "Bottom-2/3 Constant Tension Preacher Curl",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bottom-2/3 EZ-Bar Curl",
@@ -803,8 +802,8 @@ INSERT INTO program (
                {
                  "name": "Cable Triceps Kickback",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bench Dip",
@@ -815,8 +814,8 @@ INSERT INTO program (
                {
                  "name": "Cable Crunch",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Machine Crunch",
@@ -837,8 +836,8 @@ INSERT INTO program (
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cross-Body Cable Y-Raise",
@@ -849,8 +848,8 @@ INSERT INTO program (
                {
                  "name": "Cross-Body Lat Pull-Around",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Half-Kneeling 1-Arm Lat Pulldown",
@@ -861,8 +860,8 @@ INSERT INTO program (
                {
                  "name": "Low Incline Smith Machine Press",
                  "equipment": "MACHINE",
-                 "sets": "4",
-                 "reps": "8-10",
+                 "sets": 4,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Low Incline Machine Press",
@@ -873,8 +872,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported Machine Row",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Chest-Supported T-Bar Row",
@@ -885,8 +884,8 @@ INSERT INTO program (
                {
                  "name": "Overhead Cable Triceps Extension (Bar)",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "8-10",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhead Cable Triceps Extension (Rope)",
@@ -897,8 +896,8 @@ INSERT INTO program (
                {
                  "name": "Straight-Bar Lat Prayer",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Machine Lat Pullover",
@@ -909,8 +908,8 @@ INSERT INTO program (
                {
                  "name": "Pec Deck (w/ Integrated Partials)",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bent-Over Cable Pec Flye (w/ Integrated Partials)",
@@ -926,8 +925,8 @@ INSERT INTO program (
                {
                  "name": "Seated Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lying Leg Curl",
@@ -938,8 +937,8 @@ INSERT INTO program (
                {
                  "name": "Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -950,8 +949,8 @@ INSERT INTO program (
                {
                  "name": "Hack Squat",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "4, 6, 8",
+                 "sets": 3,
+                 "reps": 6,
                  "rest": 180,
                  "substitutions": [
                    "Machine Squat",
@@ -962,8 +961,8 @@ INSERT INTO program (
                {
                  "name": "Leg Extension",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Step-Up",
@@ -974,8 +973,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press Calf Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Donkey Calf Raise",
@@ -991,8 +990,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM Overhand Cable Row",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Overhand Machine Row",
@@ -1003,8 +1002,8 @@ INSERT INTO program (
                {
                  "name": "Machine Shoulder Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Shoulder Press",
@@ -1015,8 +1014,8 @@ INSERT INTO program (
                {
                  "name": "Assisted Pull-Up",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lat Pulldown",
@@ -1027,8 +1026,8 @@ INSERT INTO program (
                {
                  "name": "Paused Assisted Dip",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Decline Machine Chest Press",
@@ -1039,8 +1038,8 @@ INSERT INTO program (
                {
                  "name": "Inverse DB Zottman Curl",
                  "equipment": "DUMBBELL",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Slow-Eccentric DB Curl",
@@ -1051,8 +1050,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM DB Lateral Raise",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 0,
                  "substitutions": [
                    "Cable Upright Row",
@@ -1063,8 +1062,8 @@ INSERT INTO program (
                {
                  "name": "Cable Reverse Flye (Mechanical Dropset)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "5,4,3+",
+                 "sets": 3,
+                 "reps": 5,
                  "rest": 90,
                  "substitutions": [
                    "Reverse Pec Deck",
@@ -1080,8 +1079,8 @@ INSERT INTO program (
                {
                  "name": "Lying Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Leg Curl",
@@ -1092,8 +1091,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 90,
                  "substitutions": [
                    "Belt Squat",
@@ -1104,8 +1103,8 @@ INSERT INTO program (
                {
                  "name": "Paused Barbell RDL",
                  "equipment": "BARBELL",
-                 "sets": "2",
-                 "reps": "8",
+                 "sets": 2,
+                 "reps": 8,
                  "rest": 180,
                  "substitutions": [
                    "Paused DB RDL",
@@ -1116,8 +1115,8 @@ INSERT INTO program (
                {
                  "name": "A1: Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -1128,8 +1127,8 @@ INSERT INTO program (
                {
                  "name": "A2: Sissy Squat",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Leg Extension",
@@ -1140,8 +1139,8 @@ INSERT INTO program (
                {
                  "name": "Standing Calf Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Leg Press Calf Press",
@@ -1157,8 +1156,8 @@ INSERT INTO program (
                {
                  "name": "Incline Cable Lateral Raise",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "8-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
                  "substitutions": [
@@ -1169,8 +1168,8 @@ INSERT INTO program (
                {
                  "name": "Bayesian Cable Curl",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Incline Curl",
@@ -1181,8 +1180,8 @@ INSERT INTO program (
                {
                  "name": "Seated DB French Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "EZ-bar Skull Crusher",
@@ -1193,8 +1192,8 @@ INSERT INTO program (
                {
                  "name": "Bottom-2/3 Constant Tension Preacher Curl",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bottom-2/3 EZ-Bar Curl",
@@ -1205,8 +1204,8 @@ INSERT INTO program (
                {
                  "name": "Cable Triceps Kickback",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bench Dip",
@@ -1217,8 +1216,8 @@ INSERT INTO program (
                {
                  "name": "Cable Crunch",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Machine Crunch",
@@ -1239,8 +1238,8 @@ INSERT INTO program (
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cross-Body Cable Y-Raise",
@@ -1251,8 +1250,8 @@ INSERT INTO program (
                {
                  "name": "Cross-Body Lat Pull-Around",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Half-Kneeling 1-Arm Lat Pulldown",
@@ -1263,8 +1262,8 @@ INSERT INTO program (
                {
                  "name": "Low Incline Smith Machine Press",
                  "equipment": "MACHINE",
-                 "sets": "4",
-                 "reps": "8-10",
+                 "sets": 4,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Low Incline Machine Press",
@@ -1275,8 +1274,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported Machine Row",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Chest-Supported T-Bar Row",
@@ -1287,8 +1286,8 @@ INSERT INTO program (
                {
                  "name": "Overhead Cable Triceps Extension (Bar)",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "8-10",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhead Cable Triceps Extension (Rope)",
@@ -1299,8 +1298,8 @@ INSERT INTO program (
                {
                  "name": "Straight-Bar Lat Prayer",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Machine Lat Pullover",
@@ -1311,8 +1310,8 @@ INSERT INTO program (
                {
                  "name": "Pec Deck (w/ Integrated Partials)",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bent-Over Cable Pec Flye (w/ Integrated Partials)",
@@ -1328,8 +1327,8 @@ INSERT INTO program (
                {
                  "name": "Seated Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lying Leg Curl",
@@ -1340,8 +1339,8 @@ INSERT INTO program (
                {
                  "name": "Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -1352,8 +1351,8 @@ INSERT INTO program (
                {
                  "name": "Hack Squat",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "4, 6, 8",
+                 "sets": 3,
+                 "reps": 6,
                  "rest": 180,
                  "substitutions": [
                    "Machine Squat",
@@ -1364,8 +1363,8 @@ INSERT INTO program (
                {
                  "name": "Leg Extension",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Step-Up",
@@ -1376,8 +1375,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press Calf Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Donkey Calf Raise",
@@ -1393,8 +1392,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM Overhand Cable Row",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Overhand Machine Row",
@@ -1405,8 +1404,8 @@ INSERT INTO program (
                {
                  "name": "Machine Shoulder Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Shoulder Press",
@@ -1417,8 +1416,8 @@ INSERT INTO program (
                {
                  "name": "Assisted Pull-Up",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lat Pulldown",
@@ -1429,8 +1428,8 @@ INSERT INTO program (
                {
                  "name": "Paused Assisted Dip",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Decline Machine Chest Press",
@@ -1441,8 +1440,8 @@ INSERT INTO program (
                {
                  "name": "Inverse DB Zottman Curl",
                  "equipment": "DUMBBELL",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Slow-Eccentric DB Curl",
@@ -1453,8 +1452,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM DB Lateral Raise",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 0,
                  "substitutions": [
                    "Cable Upright Row",
@@ -1465,8 +1464,8 @@ INSERT INTO program (
                {
                  "name": "Cable Reverse Flye (Mechanical Dropset)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "5,4,3+",
+                 "sets": 3,
+                 "reps": 5,
                  "rest": 90,
                  "substitutions": [
                    "Reverse Pec Deck",
@@ -1482,8 +1481,8 @@ INSERT INTO program (
                {
                  "name": "Lying Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Leg Curl",
@@ -1494,8 +1493,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 90,
                  "substitutions": [
                    "Belt Squat",
@@ -1506,8 +1505,8 @@ INSERT INTO program (
                {
                  "name": "Paused Barbell RDL",
                  "equipment": "BARBELL",
-                 "sets": "2",
-                 "reps": "8",
+                 "sets": 2,
+                 "reps": 8,
                  "rest": 180,
                  "substitutions": [
                    "Paused DB RDL",
@@ -1518,8 +1517,8 @@ INSERT INTO program (
                {
                  "name": "A1: Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -1530,8 +1529,8 @@ INSERT INTO program (
                {
                  "name": "A2: Sissy Squat",
                  "equipment": "BODYWEIGHT",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Leg Extension",
@@ -1542,8 +1541,8 @@ INSERT INTO program (
                {
                  "name": "Standing Calf Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Leg Press Calf Press",
@@ -1559,8 +1558,8 @@ INSERT INTO program (
                {
                  "name": "Incline Cable Lateral Raise",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "8-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
                  "substitutions": [
@@ -1571,8 +1570,8 @@ INSERT INTO program (
                {
                  "name": "Bayesian Cable Curl",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Incline Curl",
@@ -1583,8 +1582,8 @@ INSERT INTO program (
                {
                  "name": "Seated DB French Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "EZ-bar Skull Crusher",
@@ -1595,8 +1594,8 @@ INSERT INTO program (
                {
                  "name": "Bottom-2/3 Constant Tension Preacher Curl",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bottom-2/3 EZ-Bar Curl",
@@ -1607,8 +1606,8 @@ INSERT INTO program (
                {
                  "name": "Cable Triceps Kickback",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bench Dip",
@@ -1619,8 +1618,8 @@ INSERT INTO program (
                {
                  "name": "Cable Crunch",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Machine Crunch",
@@ -1641,8 +1640,8 @@ INSERT INTO program (
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cross-Body Cable Y-Raise",
@@ -1653,8 +1652,8 @@ INSERT INTO program (
                {
                  "name": "Cross-Body Lat Pull-Around",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Half-Kneeling 1-Arm Lat Pulldown",
@@ -1665,8 +1664,8 @@ INSERT INTO program (
                {
                  "name": "Low Incline Smith Machine Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Low Incline Machine Press",
@@ -1677,8 +1676,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported Machine Row",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Chest-Supported T-Bar Row",
@@ -1689,8 +1688,8 @@ INSERT INTO program (
                {
                  "name": "Overhead Cable Triceps Extension (Bar)",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "8-10",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhead Cable Triceps Extension (Rope)",
@@ -1701,8 +1700,8 @@ INSERT INTO program (
                {
                  "name": "Straight-Bar Lat Prayer",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Machine Lat Pullover",
@@ -1713,8 +1712,8 @@ INSERT INTO program (
                {
                  "name": "Pec Deck (w/ Integrated Partials)",
                  "equipment": "MACHINE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bent-Over Cable Pec Flye (w/ Integrated Partials)",
@@ -1730,8 +1729,8 @@ INSERT INTO program (
                {
                  "name": "Seated Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lying Leg Curl",
@@ -1742,8 +1741,8 @@ INSERT INTO program (
                {
                  "name": "Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -1754,8 +1753,8 @@ INSERT INTO program (
                {
                  "name": "Hack Squat",
                  "equipment": "MACHINE",
-                 "sets": "2",
-                 "reps": "4, 6",
+                 "sets": 2,
+                 "reps": 5,
                  "rest": 180,
                  "substitutions": [
                    "Machine Squat",
@@ -1766,8 +1765,8 @@ INSERT INTO program (
                {
                  "name": "Leg Extension",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Step-Up",
@@ -1778,8 +1777,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press Calf Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Donkey Calf Raise",
@@ -1795,8 +1794,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM Overhand Cable Row",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Overhand Machine Row",
@@ -1807,8 +1806,8 @@ INSERT INTO program (
                {
                  "name": "Machine Shoulder Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Shoulder Press",
@@ -1819,8 +1818,8 @@ INSERT INTO program (
                {
                  "name": "Assisted Pull-Up",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "8-10",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lat Pulldown",
@@ -1831,8 +1830,8 @@ INSERT INTO program (
                {
                  "name": "Paused Assisted Dip",
                  "equipment": "BODYWEIGHT",
-                 "sets": "2",
-                 "reps": "8-10",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Decline Machine Chest Press",
@@ -1843,8 +1842,8 @@ INSERT INTO program (
                {
                  "name": "Inverse DB Zottman Curl",
                  "equipment": "DUMBBELL",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Slow-Eccentric DB Curl",
@@ -1855,8 +1854,8 @@ INSERT INTO program (
                {
                  "name": "Super-ROM DB Lateral Raise",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 0,
                  "substitutions": [
                    "Cable Upright Row",
@@ -1867,8 +1866,8 @@ INSERT INTO program (
                {
                  "name": "Cable Reverse Flye (Mechanical Dropset)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "5,4,3+",
+                 "sets": 3,
+                 "reps": 5,
                  "rest": 90,
                  "substitutions": [
                    "Reverse Pec Deck",
@@ -1884,8 +1883,8 @@ INSERT INTO program (
                {
                  "name": "Lying Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Leg Curl",
@@ -1896,8 +1895,8 @@ INSERT INTO program (
                {
                  "name": "Leg Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 90,
                  "substitutions": [
                    "Belt Squat",
@@ -1908,8 +1907,8 @@ INSERT INTO program (
                {
                  "name": "Paused Barbell RDL",
                  "equipment": "BARBELL",
-                 "sets": "2",
-                 "reps": "8",
+                 "sets": 2,
+                 "reps": 8,
                  "rest": 180,
                  "substitutions": [
                    "Paused DB RDL",
@@ -1920,8 +1919,8 @@ INSERT INTO program (
                {
                  "name": "A1: Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -1932,8 +1931,8 @@ INSERT INTO program (
                {
                  "name": "A2: Sissy Squat",
                  "equipment": "BODYWEIGHT",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 0,
                  "substitutions": [
                    "Leg Extension",
@@ -1944,8 +1943,8 @@ INSERT INTO program (
                {
                  "name": "Standing Calf Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Leg Press Calf Press",
@@ -1961,8 +1960,8 @@ INSERT INTO program (
                {
                  "name": "Incline Cable Lateral Raise",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "8-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
                  "substitutions": [
@@ -1973,8 +1972,8 @@ INSERT INTO program (
                {
                  "name": "Bayesian Cable Curl",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Incline Curl",
@@ -1985,8 +1984,8 @@ INSERT INTO program (
                {
                  "name": "Seated DB French Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "EZ-bar Skull Crusher",
@@ -1997,8 +1996,8 @@ INSERT INTO program (
                {
                  "name": "Bottom-2/3 Constant Tension Preacher Curl",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bottom-2/3 EZ-Bar Curl",
@@ -2009,8 +2008,8 @@ INSERT INTO program (
                {
                  "name": "Cable Triceps Kickback",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Bench Dip",
@@ -2021,8 +2020,8 @@ INSERT INTO program (
                {
                  "name": "Cable Crunch",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Machine Crunch",
@@ -2043,8 +2042,8 @@ INSERT INTO program (
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cross-Body Cable Y-Raise",
@@ -2055,8 +2054,8 @@ INSERT INTO program (
                {
                  "name": "Lat-Focused Cable Row",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Half-Kneeling 1-Arm Lat Pulldown",
@@ -2067,8 +2066,8 @@ INSERT INTO program (
                {
                  "name": "Low Incline DB Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Low Incline Machine Press",
@@ -2079,8 +2078,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported T-Bar Row + Kelso Shrug",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10 + 4-6",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 120,
                  "substitutions": [
                    "Machine Chest-Supported Row + Kelso Shrug",
@@ -2091,8 +2090,8 @@ INSERT INTO program (
                {
                  "name": "Bent-Over Cable Pec Flye (w/ Integrated Partials)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Pec Deck (w/ Integrated Partials)",
@@ -2103,8 +2102,8 @@ INSERT INTO program (
                {
                  "name": "1-Arm Lat Pull-In",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Wide-Grip Lat Pulldown",
@@ -2115,8 +2114,8 @@ INSERT INTO program (
                {
                  "name": "Dual-Cable Triceps Press",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhead Cable Triceps Extension (Bar)",
@@ -2132,8 +2131,8 @@ INSERT INTO program (
                {
                  "name": "Seated Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lying Leg Curl",
@@ -2144,8 +2143,8 @@ INSERT INTO program (
                {
                  "name": "Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -2156,8 +2155,8 @@ INSERT INTO program (
                {
                  "name": "Smith Machine Squat",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "4, 6, 8",
+                 "sets": 3,
+                 "reps": 6,
                  "rest": 180,
                  "substitutions": [
                    "Machine Squat",
@@ -2168,8 +2167,8 @@ INSERT INTO program (
                {
                  "name": "Leg Extension",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Step-Up",
@@ -2180,8 +2179,8 @@ INSERT INTO program (
                {
                  "name": "DB Calf Jumps",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Leg Press Calf Jumps",
@@ -2197,8 +2196,8 @@ INSERT INTO program (
                {
                  "name": "Dual-Handle Lat Pulldown (Mid-back + Lats)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhand Lat Pulldown",
@@ -2209,8 +2208,8 @@ INSERT INTO program (
                {
                  "name": "Seated DB Shoulder Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Barbell Shoulder Press",
@@ -2221,8 +2220,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported Machine Row",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Chest-Supported T-Bar Row",
@@ -2233,8 +2232,8 @@ INSERT INTO program (
                {
                  "name": "Decline Machine Chest Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Decline Smith Machine Press",
@@ -2245,8 +2244,8 @@ INSERT INTO program (
                {
                  "name": "Concentration Cable Curl",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "10-12",
+                 "sets": 2,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Concentration Curl",
@@ -2257,8 +2256,8 @@ INSERT INTO program (
                {
                  "name": "Cross-Body Cable Y-Raise",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Machine Lateral Raise",
@@ -2269,8 +2268,8 @@ INSERT INTO program (
                {
                  "name": "Rear Delt 45\u00b0 Cable Flye",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "DB Rear Delt Swing",
@@ -2286,8 +2285,8 @@ INSERT INTO program (
                {
                  "name": "Lying Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Leg Curl",
@@ -2298,8 +2297,8 @@ INSERT INTO program (
                {
                  "name": "Smith Machine Reverse Lunge",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 90,
                  "substitutions": [
                    "DB Reverse Lunge",
@@ -2310,8 +2309,8 @@ INSERT INTO program (
                {
                  "name": "Glute-Ham Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 180,
                  "substitutions": [
                    "Nordic Ham Curl",
@@ -2322,8 +2321,8 @@ INSERT INTO program (
                {
                  "name": "A1: Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": null,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -2334,8 +2333,8 @@ INSERT INTO program (
                {
                  "name": "A2: Machine Hip Abduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": null,
                  "substitutions": [
                    "Cable Hip Abduction",
@@ -2346,8 +2345,8 @@ INSERT INTO program (
                {
                  "name": "Standing Calf Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Calf Raise",
@@ -2363,8 +2362,8 @@ INSERT INTO program (
                {
                  "name": "Incline Cable Lateral Raise",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "8-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 60,
                  "notes": "Decide on your weak point using The Weak Point Table in your Hypertrophy Handbook. Perform ONE of the exercises listed under Exercise 1 for the sets and reps provided here.",
                  "substitutions": [
@@ -2375,8 +2374,8 @@ INSERT INTO program (
                {
                  "name": "Slow-Eccentric EZ-Bar Skull Crusher",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Slow-Eccentric DB Skull Crusher",
@@ -2387,8 +2386,8 @@ INSERT INTO program (
                {
                  "name": "Slow-Eccentric Bayesian Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Slow-Eccentric DB Incline Curl",
@@ -2399,8 +2398,8 @@ INSERT INTO program (
                {
                  "name": "Triceps Diverging Pressdown (Long Rope or 2 Ropes)",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Cable Triceps Kickback",
@@ -2411,8 +2410,8 @@ INSERT INTO program (
                {
                  "name": "Reverse-Grip Cable Curl",
                  "equipment": "CABLE",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Reverse-Grip EZ-Bar Curl",
@@ -2423,8 +2422,8 @@ INSERT INTO program (
                {
                  "name": "Roman Chair Leg Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-20",
+                 "sets": 3,
+                 "reps": 15,
                  "rest": 90,
                  "substitutions": [
                    "Hanging Leg Raise",
@@ -2445,8 +2444,8 @@ INSERT INTO program (
                {
                  "name": "Cuffed Behind-The-Back Lateral Raise",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cross-Body Cable Y-Raise",
@@ -2457,8 +2456,8 @@ INSERT INTO program (
                {
                  "name": "Lat-Focused Cable Row",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Half-Kneeling 1-Arm Lat Pulldown",
@@ -2469,8 +2468,8 @@ INSERT INTO program (
                {
                  "name": "Low Incline DB Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Low Incline Machine Press",
@@ -2481,8 +2480,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported T-Bar Row + Kelso Shrug",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10 + 4-6",
+                 "sets": 3,
+                 "reps": 8,
                  "rest": 120,
                  "substitutions": [
                    "Machine Chest-Supported Row + Kelso Shrug",
@@ -2493,8 +2492,8 @@ INSERT INTO program (
                {
                  "name": "Bent-Over Cable Pec Flye (w/ Integrated Partials)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Pec Deck (w/ Integrated Partials)",
@@ -2505,8 +2504,8 @@ INSERT INTO program (
                {
                  "name": "1-Arm Lat Pull-In",
                  "equipment": "OTHER",
-                 "sets": "2",
-                 "reps": "12-15",
+                 "sets": 2,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Wide-Grip Lat Pulldown",
@@ -2517,8 +2516,8 @@ INSERT INTO program (
                {
                  "name": "Dual-Cable Triceps Press",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhead Cable Triceps Extension (Bar)",
@@ -2534,8 +2533,8 @@ INSERT INTO program (
                {
                  "name": "Seated Leg Curl",
                  "equipment": "OTHER",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Lying Leg Curl",
@@ -2546,8 +2545,8 @@ INSERT INTO program (
                {
                  "name": "Machine Hip Adduction",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Cable Hip Adduction",
@@ -2558,8 +2557,8 @@ INSERT INTO program (
                {
                  "name": "Smith Machine Squat",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "4, 6, 8",
+                 "sets": 3,
+                 "reps": 6,
                  "rest": 180,
                  "substitutions": [
                    "Machine Squat",
@@ -2570,8 +2569,8 @@ INSERT INTO program (
                {
                  "name": "Leg Extension",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "DB Step-Up",
@@ -2582,8 +2581,8 @@ INSERT INTO program (
                {
                  "name": "DB Calf Jumps",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "12-15",
+                 "sets": 3,
+                 "reps": 12,
                  "rest": 90,
                  "substitutions": [
                    "Leg Press Calf Jumps",
@@ -2599,8 +2598,8 @@ INSERT INTO program (
                {
                  "name": "Dual-Handle Lat Pulldown (Mid-back + Lats)",
                  "equipment": "CABLE",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Overhand Lat Pulldown",
@@ -2611,8 +2610,8 @@ INSERT INTO program (
                {
                  "name": "Seated DB Shoulder Press",
                  "equipment": "DUMBBELL",
-                 "sets": "3",
-                 "reps": "10-12",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 90,
                  "substitutions": [
                    "Seated Barbell Shoulder Press",
@@ -2623,8 +2622,8 @@ INSERT INTO program (
                {
                  "name": "Chest-Supported Machine Row",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Chest-Supported T-Bar Row",
@@ -2635,8 +2634,8 @@ INSERT INTO program (
                {
                  "name": "Decline Machine Chest Press",
                  "equipment": "MACHINE",
-                 "sets": "3",
-                 "reps": "8-10",
+                 "sets": 3,
+                 "reps": 10,
                  "rest": 120,
                  "substitutions": [
                    "Decline Smith Machine Press",

@@ -146,8 +146,8 @@ data class DayDTO(
 data class ExerciseDTO(
     val name: String,
     val equipment: String,
-    val sets: String,
-    val reps: String,
+    val sets: Int,
+    val reps: Int,
     val rest: Int? = null,
     val substitutions: List<String>,
     val notes: String

@@ -57,11 +57,28 @@ CREATE TABLE exercise (
 CREATE INDEX idx_program_title ON program(title);
 CREATE INDEX idx_exercise_target_muscle ON exercise(target_muscle);
 
-CREATE TABLE progress (
+CREATE TABLE IF NOT EXISTS user_program (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    account_id UUID NOT NULL REFERENCES account(id),
-    programs JSONB NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT now(),
-    updated_at TIMESTAMP NOT NULL DEFAULT now()
+    user_id UUID NOT NULL REFERENCES account(id),
+    program_id UUID NOT NULL REFERENCES program(id),
+    current_week INTEGER NOT NULL DEFAULT 1,
+    current_day INTEGER NOT NULL DEFAULT 1,
+    completed_days JSONB NOT NULL,
+    started_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    finished BOOLEAN NOT NULL DEFAULT FALSE
 );
-CREATE INDEX idx_progress_user_id ON progress(account_id);
+
+CREATE TABLE IF NOT EXISTS user_training (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    progress_id UUID NOT NULL REFERENCES user_program(id),
+    program_id UUID NOT NULL REFERENCES program(id),
+    week_index INTEGER NOT NULL,
+    day_index INTEGER NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    exercises JSONB,
+    duration_in_seconds INTEGER NOT NULL DEFAULT 0,
+    started_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    finished BOOLEAN NOT NULL DEFAULT FALSE
+);

@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import io.ktor.server.request.receive
+import java.util.UUID
 
 val jwtSecret = "monSuperSecretJWT"
 
@@ -26,4 +28,16 @@ fun Application.configureSecurity() {
             }
         }
     }
+}
+
+fun ApplicationCall.extractUserId(): UUID? {
+    return this.principal<JWTPrincipal>()
+        ?.payload
+        ?.getClaim("user_id")
+        ?.asString()
+        ?.let { runCatching { UUID.fromString(it) }.getOrNull() }
+}
+
+suspend inline fun <reified T : Any> ApplicationCall.receiveCatching(): Result<T> {
+    return runCatching { receive<T>() }
 }

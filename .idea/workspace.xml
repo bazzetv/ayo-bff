@@ -4,11 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3c9ca5e-2a6c-4832-9501-bd3b64a53682" name="Changes" comment="" />
+    <list default="true" id="9ec3d9ac-88a4-42b1-b3ef-846ee7baf5c3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/application/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/application/Application.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/database/UserProgramTable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/database/UserProgramTable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/database/UserTrainingTable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/database/UserTrainingTable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/ProgramRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/ProgramRoutes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/TrainingRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/TrainingRoutes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/utils/UUIDSerializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/utils/UUIDSerializer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/resources/db/migration/V2__create_training_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/resources/db/migration/V2__create_training_tables.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -16,11 +30,222 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
-        <projects_view />
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ayo-bff" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ayo-bff" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+        <option value="Class" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+    &quot;associatedIndex&quot;: 1
+    }</component>
+  <component name="ProjectId" id="2wh6JhGGpVnZ8F3OYfEj0SNgEPt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Run AYO.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build ayo-bff.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ayo-bff [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ayo-bff [run].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ayo-bff:app [:app:com.ayo.bff.application.ApplicationKt.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.ApplicationKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.Run AYO.executor&quot;: &quot;Debug&quot;,
+    &quot;Ktor.ApplicationKt.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/issammacstudio/projects/ayo-bff/app/src/main/kotlin/com/ayo/bff/routes&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes" />
+      <recent name="$PROJECT_DIR$/app/src/main/resources/db/migration" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Kotlin.Run AYO">
+    <configuration name="Unnamed" type="ChromiumRemoteDebugType" factoryName="Chromium Remote" nameIsGenerated="true" port="9229">
+      <method v="2" />
+    </configuration>
+    <configuration name="ayo-bff [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ayo-bff [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Run AYO" type="JetRunConfigurationType" temporary="true">
+      <envs>
+        <env name="API_SECRET" value="root" />
+        <env name="GOOGLE_CLIENT_ID" value="8178898098-2sifrb56hermpnsk8rhpb2u43bp6apc0.apps.googleusercontent.com" />
+        <env name="GOOGLE_CLIENT_SECRET" value="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" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="com.ayo.bff.application.ApplicationKt" />
+      <module name="ayo-bff.app.main" />
+      <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApplicationKt" type="KtorApplicationConfigurationType" factoryName="Ktor" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="temurin-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.ayo.bff.application.ApplicationKt" />
+      <module name="ayo-bff.app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ayo.bff.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="alternativeJrePath" value="temurin-21" />
+      <option name="alternativeJrePathEnabled" value="true" />
+      <option name="includeProvidedScope" value="false" />
+      <option name="mainClass" value="com.ayo.bff.application.ApplicationKt" />
+      <option name="passParentEnvs" value="true" />
+      <option name="programParameters" value="" />
+      <option name="shortenCommandLine" />
+      <option name="vmParameters" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Gradle.ayo-bff [build]" />
+      <item itemvalue="Gradle.ayo-bff [run]" />
+      <item itemvalue="Kotlin.Run AYO" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.Run AYO" />
+        <item itemvalue="Gradle.ayo-bff [run]" />
+        <item itemvalue="Gradle.ayo-bff [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ec3d9ac-88a4-42b1-b3ef-846ee7baf5c3" name="Changes" comment="" />
+      <created>1746481390034</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746481390034</updated>
+      <workItem from="1746481391030" duration="3422000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/AuthRoutes.kt</url>
+          <line>102</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/AuthRoutes.kt</url>
+          <line>175</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/AuthRoutes.kt</url>
+          <line>56</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/kotlin/com/ayo/bff/routes/TrainingRoutes.kt</url>
+          <line>42</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
