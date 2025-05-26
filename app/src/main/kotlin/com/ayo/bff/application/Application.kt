@@ -4,7 +4,6 @@ import com.ayo.bff.database.DatabaseFactory
 import com.ayo.bff.routes.authRoutes
 import com.ayo.bff.routes.programRoutes
 import com.ayo.bff.routes.trainingRoutes
-import com.ayo.bff.utils.UUIDSerializer
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -13,9 +12,6 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
-import java.util.UUID
 
 fun main() {
     DatabaseFactory.init()
@@ -40,12 +36,4 @@ fun Application.module() {
         trainingRoutes()
         programRoutes()
     }
-}
-
-val json = Json {
-    serializersModule = SerializersModule {
-        contextual(UUID::class, UUIDSerializer)
-    }
-    encodeDefaults = true
-    ignoreUnknownKeys = true
 }

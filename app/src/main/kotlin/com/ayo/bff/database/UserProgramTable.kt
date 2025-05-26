@@ -99,6 +99,19 @@ object UserProgramTable : Table("user_program") {
             it[updatedAt] = Instant.now()
         }
     }
+
+    fun updateCompletedDays(updatedCompletedDays : Map<Int, List<Int>>, newDay: Int, id: UUID): Int {
+        return transaction {
+            UserProgramTable.update({ UserProgramTable.id eq id }) {
+                it[currentDay] = newDay
+                it[completedDays] = Json.encodeToJsonElement(
+                    MapSerializer(Int.serializer(), ListSerializer(Int.serializer())),
+                    updatedCompletedDays
+                )
+                it[updatedAt] = Instant.now()
+            }
+        }
+    }
 }
 
 @Serializable

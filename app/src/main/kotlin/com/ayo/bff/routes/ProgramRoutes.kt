@@ -59,6 +59,7 @@ fun Route.programRoutes() {
                     program = program,
                     currentDay = userProgress?.currentDay?.toString(),
                     currentWeek = userProgress?.currentWeek?.toString(),
+                    completedDays = userProgress?.completedDays?:emptyMap(),
                     status = status
                 )
             )
@@ -134,5 +135,6 @@ data class ProgramResponseDTO(
     val program: FullProgramDTO,
     val currentDay: String? = null,
     val currentWeek: String? = null,
+    val completedDays: Map<Int, List<Int>> = emptyMap(),
     val status: String
 )

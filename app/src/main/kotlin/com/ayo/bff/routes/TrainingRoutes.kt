@@ -81,19 +81,37 @@ fun Route.trainingRoutes() {
         }
 
         post("/private/training/finish") {
-            call.extractUserId() ?: return@post call.respond(HttpStatusCode.Unauthorized)
-
-            val body = runCatching { call.receive<FinishTrainingRequestDTO>() }.getOrElse {
+            val userId = call.extractUserId() ?: return@post call.respond(HttpStatusCode.Unauthorized)
+            val body = runCatching {
+                call.receive<FinishTrainingRequestDTO>()
+            }.getOrElse {
                 return@post call.respond(HttpStatusCode.BadRequest, "Requête invalide")
             }
 
-            val updatedRows = UserProgramTable.markProgramFinished(body.programId)
+            val userProgram = UserProgramTable.fetchUserPrograms(userId).find { it.id == body.progressId }
+                ?: return@post call.respond(HttpStatusCode.NotFound, "Programme introuvable ou non autorisé")
+
+
+            val training = UserTrainingTable.getUserTrainingByProgressId(userProgram.id)
+                ?: return@post call.respond(HttpStatusCode.NotFound, "Aucun entrainement trouvé")
+
+            UserTrainingTable.markUserTrainingFinished(training.id)
+
+            val newDay = userProgram.currentDay + 1
+            val updatedCompletedDays = userProgram.completedDays.toMutableMap().apply {
+                val weekDays = getOrDefault(userProgram.currentWeek, emptyList())
+                put(userProgram.currentWeek, (weekDays + userProgram.currentDay).distinct())
+            }
+
+            val updatedRows = UserProgramTable.updateCompletedDays(updatedCompletedDays, newDay, userProgram.id)
+
             if (updatedRows == 0) {
-                return@post call.respond(HttpStatusCode.NotFound, "Programme introuvable ou non autorisé")
+                return@post call.respond(HttpStatusCode.InternalServerError, "Erreur lors de la mise à jour du programme")
             }
 
             call.respond(HttpStatusCode.OK, "Programme marqué comme terminé")
         }
+
     }
 }
 
@@ -112,5 +130,5 @@ data class UpdateCurrentTrainingRequest(
 @Serializable
 data class FinishTrainingRequestDTO(
     @Serializable(with = UUIDSerializer::class)
-    val programId: UUID
+    val progressId: UUID
 )
